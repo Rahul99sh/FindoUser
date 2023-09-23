@@ -1,3 +1,99 @@
 <resources>
-    <string name="app_name">Findo User</string>
+    <string name="app_name">Findo</string>
+    <string name="categories">Categories</string>
+    <string name="store_name">Store Name</string>
+    <string name="nearest_store">Nearest Store</string>
+    <string name="distance_of_store_from_me">Distance of store from me</string>
+    <string name="see_more">See More</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="side_menu">Side Menu</string>
+    <string name="cart">Cart</string>
+    <string name="home">Home</string>
+    <string name="category">Category</string>
+    <string name="favorites">Favorites</string>
+    <string name="settings">Settings</string>
+    <string name="hello_world">Hello World</string>
+    <string name="shopingcart">shopingCart</string>
+    <string name="your_cart_is_empty">Your cart is Empty!</string>
+    <string name="please_add_something_in_your_cart">Please add something in your cart.</string>
+    <string name="start_searching">Start searching..</string>
+    <string name="organic_lemon">Organic Lemon</string>
+    <string name="organic_mountain_works_as_a_seller_for_many_organic_growers_of_organic_lemons_organic_lemons_are_easy_to_spot_in_your_produce_aisle_they_are_just_like_regular_lemons_but_they_will_usually_have_a_few_more_scars_on_the_outside_of_the_lemon_skin_organic_lemons_are_considered_to_be_the_world_s_finest_lemon_for_juicing">Organic Mountain works as a seller for many organic growers of organic lemons. Organic lemons are easy to spot in your produce aisle. They are just like regular lemons, but they will usually have a few more scars on the outside of the lemon skin. Organic lemons are considered to be the world\'s finest lemon for juicing</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="todo">TODO</string>
+
+
+    <string name="ad_unit_id_banner">ca-app-pub-9956624827890463/5814508775</string>
+
+
+
+    <string name="otp_verification">OTP Verification</string>
+    <string name="we_will_send_you_an_one_time_password_on_this_mobile_number">We will send you an One Time Password on this mobile number</string>
+    <string name="_84">+91 - </string>
+    <string name="_123456789">123456789</string>
+    <string name="get_otp">GET OTP</string>
+    <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="enter_the_otp_sent_to">Enter the OTP sent to</string>
+    <string name="didn_t_receive_the_otp">Didn\'t receive the OTP?</string>
+    <string name="verify">Verify</string>
+    <string name="resend_otp">RESEND OTP</string>
+
+    <string name="welcome_back">Welcome back !</string>
+    <string name="sign_in_to_your_account">Sign in to your account</string>
+    <string name="email_address">Email Address</string>
+    <string name="enter_password">Enter password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_password">forgot password</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign up</string>
+    <string name="create_account">Create account</string>
+    <string name="quickly_create_account">Quickly create account</string>
+    <string name="phone_number">Phone number</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="signup">Signup</string>
+    <string name="don_t_have_an_account_login">Don\'t have an account? Login</string>
+    <string name="welcome">Welcome</string>
+    <string name="hello_welcome_to_our_store">Hello Welcome to our store</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="remove_from_cart">Remove from cart</string>
+    <string name="vegetable">Vegetable</string>
+    <string name="don_t_have_an_account">don_t_have_an_account</string>
+    <string name="login_here">Login here</string>
+    <string name="already_registered">Already registered</string>
+    <string name="register_here">Register here</string>
+    <string name="not_registered_yet">Not registered yet</string>
+    <string name="google_maps_api">AIzaSyAOLOPoZV6QQkgcYkU_awVl5RRcT7xwdas</string>
+    <string name="items">Items</string>
+    <string name="shop_name">Shop Name</string>
+    <string name="broccoli">Brocolli</string>
+    <string name="add">Add</string>
+    <string name="no_favourites_yet">No Favourites Yet!</string>
+    <string name="tap_on_a_heart_on_any_product_to_add_a_favourite">Tap on a heart on any product to add a favourite</string>
+    <string name="fav">Fav</string>
+    <string name="explore_now">Explore Now</string>
+    <string name="emptyFrag">Oops there are no items in your favourites Dont\'t be sad! Press the button to explore and add items</string>
+    <string name="carttext">Cart</string>
+    <string name="favouritesText">Favourites</string>
+    <string name="remove">Remove</string>
+    <string name="description">Description</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="featured_items">Featured Items</string>
+    <string name="all_stores">All Stores</string>
+    <string name="search_history">Search History</string>
+    <string name="clear">Clear</string>
+    <string name="store_name_distance">Store Name, distance</string>
+    <string name="_200">200 ₹</string>
+    <string name="fav_img">Fav Img</string>
+    <string name="featured">Featured</string>
+    <string name="apple">Apple</string>
+    <string name="_200_rs">200 Rs</string>
+    <string name="add_image">Add Image</string>
+    <string name="all_items">All Items</string>
+    <string name="university_of_rajasthan_jaipur">University of Rajasthan, Jaipur</string>
+    <string name="search">search</string>
+    <string name="search_here">Search here...</string>
+    <string name="filter">filter</string>
+    <string name="all_products">All Products</string>
+
 </resources>

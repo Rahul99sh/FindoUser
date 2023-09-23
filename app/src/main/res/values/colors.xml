@@ -1,5 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--    theme colors-->
+    <color name="greytext">#B1B2B7</color>
+    <color name="lightGreen">#009033</color>
+    <!--    <color name="darkGreen">#134C27</color>-->
+    <color name="cardBG">#C4E3CE</color>
+
+    <color name="whiteBackground">#FFF</color>
+    <color name="blueBackgound">#F4F5F9</color>
+    <color name="greyBackground">#F5F5F5</color>
+    <color name="textlight">#C4E3CE</color>
+    <color name="textBlack">#868889</color>
+    <color name="linkColor">#1a0dab</color>
+    <color name="border">#EBEBEB</color>
+    <color name="primary">#aedc81</color>
+    <color name="primaryDark">#6cc51d</color>
+    <color name="primaryLight">#ebffd7</color>
+    <color name="featured">#006400</color>
+
+    <color name="red_inactive">#e57373</color>
+    <color name="purple_inactive">#ba68c8</color>
+    <color name="blue_inactive">#64b5f6</color>
+    <color name="green_inactive">#81c784</color>
+    <color name="blue_grey_inactive">#90a4ae</color>
+    <color name="yellow_inactive">#fff176</color>
+    <color name="orange_inactive">#ffb74d</color>
+    <color name="gery_inactive">#e0e0e0</color>
+    <color name="red_light">#DF6F6F</color>
+    <color name="default_inactive">#78909c</color>
+    <color name="shimmer_effect">#BFBDBD</color>
+    <color name = "transparent_green">#53B175</color>
+    <color name="transparent_yellow">#40FDE5</color>
+    <color name="yellow">#FDE598</color>
+    <color name="DarkYellow">#40B7DF</color>
+    <color name="SecondYellow">#B7DFF5</color>
+    <color name="transparent_Purple">#26836A</color>
+    <color name="purple">#80836A</color>
+    <color name="transparent_red">#26D73B</color>
+    <color name="red">#80D73B</color>
+    <color name="transparent_flamingo">#26FC8E</color>
+    <color name="flamingo">#80FC8E</color>
+    <color name="transparent_brown">#269466</color>
+    <color name="brown">#809466</color>
+    <color name="transparent_cream">#26F7A5</color>
+    <color name="cream">#80F7A5</color>
+    <color name="transparent_magenta">#26FF00</color>
+    <color name="magenta">#80FF00</color>
+    <color name="transparent_cyan">#201FFF</color>
+    <color name="cyan">#8001FF</color>
+    <color name="transparent_mustard">#26FFE4</color>
+    <color name="mustard">#80FFE4</color>
+    <color name="transparent_Denim">#262072</color>
+    <color name="denim">#802072</color>
+    <color name="transparent_cherub">#26F6DA</color>
+    <!--    <color name="cherub">#80F6DA</color>-->
+    <color name="transparent_darkBrown">#263f41</color>
+    <color name="darkBrown">#803f41</color>
+
+    <color name="dark_one">#dcdcdc</color>
+    <color name="dark_two">#dcdcdc</color>
+    <color name="dark_three">#dcdcdc</color>
+    <color name="dark_four">#dcdcdc</color>
+
+    <color name="orange_one">#e65252</color>
+    <color name="orange_two">#e65252</color>
+    <color name="orange_three">#e65252</color>
+    <color name="orange_four">#e65252</color>
+
+    <color name="primary_dark">#445DE4</color>
+    <color name="accent">#F44336</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+
+    <array name="active">
+        <item>@color/orange_one</item>
+        <item>@color/orange_two</item>
+        <item>@color/orange_three</item>
+        <item>@color/orange_four</item>
+    </array>
+
+    <color name="color_primary_text">#212121</color>
+
+
+    <color name="md_white_1000">#ffffff</color>
+    <color name="dark_blue">#405467</color>
+
+
+    <array name="inactive">
+        <item>@color/dark_one</item>
+        <item>@color/dark_two</item>
+        <item>@color/dark_three</item>
+        <item>@color/dark_four</item>
+    </array>
+
+
 </resources>
