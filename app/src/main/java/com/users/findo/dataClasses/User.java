@@ -1,4 +1,4 @@
-package com.users.findo.DataClasses;
+package com.users.findo.dataClasses;
 
 import java.util.List;
 
