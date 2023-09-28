@@ -13,10 +13,10 @@
         android:theme="@style/Theme.Findo"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.DashboardActivity"
+            android:name=".activities.DashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.FirstScreen"
+            android:name=".activities.FirstScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.LoginActivity"
+            android:name=".activities.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
