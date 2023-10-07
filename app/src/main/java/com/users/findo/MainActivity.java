@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         userViewModel = new ViewModelProvider(this).get(RetUser.class);
 
-
         userViewModel.fetchUser();
         userViewModel.getUserLiveData().observe(this, user1 -> {
             this.user = user1;

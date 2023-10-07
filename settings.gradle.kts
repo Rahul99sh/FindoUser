@@ -19,4 +19,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Findo User"
 include(":app")
- 
+include (":openCv")
