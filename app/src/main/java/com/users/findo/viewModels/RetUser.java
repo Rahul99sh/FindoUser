@@ -1,4 +1,4 @@
-package com.users.findo.ViewModels;
+package com.users.findo.viewModels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

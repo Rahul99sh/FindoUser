@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import com.users.findo.dataClasses.User;
-import com.users.findo.ViewModels.RetUser;
+import com.users.findo.viewModels.RetUser;
 import com.users.findo.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

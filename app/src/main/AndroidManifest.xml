@@ -25,10 +25,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.Login"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".activities.Onboarding"
+            android:exported="false"/>
+        <activity
+            android:name=".activities.Registration"
             android:exported="false"/>
     </application>
 
