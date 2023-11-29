@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<com.google.android.material.card.MaterialCardView-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="@dimen/_60sdp"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    app:cardCornerRadius="@dimen/_10sdp"-->
+<!--    android:layout_margin="@dimen/_6sdp"-->
+<!--    app:strokeWidth="0.5dp"-->
+<!--    app:strokeColor="#dbdce0"-->
+<!--    android:elevation="0dp"-->
+<!--    >-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:background="@color/blueBackgound">-->
+<!--        <de.hdodenhof.circleimageview.CircleImageView-->
+<!--            android:id="@+id/storeImage"-->
+<!--            android:layout_width="@dimen/_50sdp"-->
+<!--            android:layout_height="@dimen/_50sdp"-->
+<!--            android:padding="@dimen/_4sdp"-->
+<!--            android:src="@drawable/ic_launcher_background"/>-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical"-->
+<!--            android:paddingHorizontal="@dimen/_4sdp"-->
+<!--            android:layout_marginStart="@dimen/_4sdp"-->
+<!--            >-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/storeName"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/_10sdp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:text="@string/store_name"-->
+<!--                android:textSize="@dimen/_14sdp"-->
+<!--                android:textStyle="bold" />-->
+<!--            <TextView-->
+<!--                android:id="@+id/storeDist"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_marginTop="@dimen/_4sdp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:drawablePadding="@dimen/_10sdp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="@dimen/_10sdp"-->
+<!--                android:text="@string/distance_of_store_from_me"-->
+<!--                 />-->
+<!--        </LinearLayout>-->
+
+
+<!--    </LinearLayout>-->
+
+<!--</com.google.android.material.card.MaterialCardView>-->
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_12sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/storeImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_150sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_launcher_background">
+                    </ImageView>
+
+                    <ImageView
+                        android:id="@+id/fav_img"
+                        android:layout_width="@dimen/_28sdp"
+                        android:layout_height="@dimen/_28sdp"
+                        android:layout_marginStart="@dimen/_250sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_redheart"
+                        android:contentDescription="@string/fav_img" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:weightSum="1"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:paddingHorizontal="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            >
+
+            <TextView
+                android:id="@+id/storeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_weight="0.9"
+                android:text="@string/store_name"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/storeDist"
+                android:layout_gravity="end|center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_10sdp"
+                android:text="@string/distance_of_store_from_me"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:src="@drawable/baseline_star_24"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:text="4.8 (100)"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

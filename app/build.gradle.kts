@@ -56,4 +56,14 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.intuit.sdp:sdp-android:1.1.0")
     implementation ("com.airbnb.android:lottie:6.0.0")
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
+    //shimmer loading effect
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    implementation ("com.google.android.gms:play-services-location:21.0.1")
+    //bottom navBar
+    implementation ("com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.4")
 }

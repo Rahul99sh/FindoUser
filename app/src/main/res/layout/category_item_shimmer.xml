@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardElevation="0dp"
+    android:layout_marginHorizontal="@dimen/_5sdp"
+    android:layout_marginVertical="@dimen/_5sdp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/shimmer_effect"
+        android:gravity="center_horizontal|center_vertical">
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/category_shimmer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/categoryImage"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:padding="@dimen/_4sdp"
+                android:src="@color/shimmer_effect"/>
+            <TextView
+                android:id="@+id/categoryName"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:gravity="center"
+                android:textSize="@dimen/_10sdp"
+                android:padding="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:background="@color/shimmer_effect" />
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

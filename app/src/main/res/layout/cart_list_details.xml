@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_60sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_5sdp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@color/blueBackgound"
+    android:layout_marginTop="@dimen/_15sdp"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:padding="@dimen/_4sdp"
+            android:src="@drawable/category_baby_care"
+            android:id="@+id/cartListImage"
+
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_weight="0.55"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cartListText"
+                android:text="Broccoli"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"
+                />
+
+            <TextView
+                android:id="@+id/storeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Store Name, distance"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:textSize="@dimen/_10sdp"
+                />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@color/red_light"
+            >
+            <ImageView
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:id="@+id/cartListDelete"
+                android:src="@drawable/ic_deletetrash"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

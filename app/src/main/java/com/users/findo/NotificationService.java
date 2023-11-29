@@ -1,27 +1,30 @@
 package com.users.findo;
 
 
+import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-        import android.app.PendingIntent;
-        import android.content.Intent;
-        import android.content.pm.PackageManager;
-        import android.graphics.Bitmap;
-        import android.graphics.BitmapFactory;
-        import android.os.Build;
-        import android.util.Log;
-        import androidx.annotation.NonNull;
-        import androidx.annotation.RequiresApi;
-        import androidx.core.app.ActivityCompat;
-        import androidx.core.app.NotificationCompat;
-        import androidx.core.app.NotificationManagerCompat;
-        import com.google.firebase.auth.FirebaseAuth;
-        import com.google.firebase.messaging.FirebaseMessagingService;
-        import com.google.firebase.messaging.RemoteMessage;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
 import com.users.findo.activities.FirstScreen;
 
 import java.net.URL;
-        import java.util.Objects;
+import java.util.Objects;
 
 public class NotificationService extends FirebaseMessagingService {
 
@@ -32,7 +35,7 @@ public class NotificationService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
+        Log.d("Notification Received", "From: " + remoteMessage.getFrom());
         mAuth = FirebaseAuth.getInstance();
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0 ) {
@@ -75,7 +78,7 @@ public class NotificationService extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
 
-        String channelId = "dcbud1939dnsu";
+        String channelId = "findoshop090";
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.drawable.findo_logo)
@@ -90,10 +93,22 @@ public class NotificationService extends FirebaseMessagingService {
             try {
                 URL url = new URL(imageUrl);
                 Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                notificationBuilder.setStyle(new NotificationCompat.BigPictureStyle().bigPicture(bitmap));
+                if (bitmap != null) {
+                    notificationBuilder.setStyle(new NotificationCompat.BigPictureStyle().bigPicture(bitmap));
+                } else {
+                    // Handle the case where the bitmap is null after decoding
+                    // For example, show the notification without the image
+                    showNotificationWithoutImage(notificationBuilder);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
+                // Handle URL parsing or connection exceptions here
+                // Show the notification without the image in case of an exception
+                showNotificationWithoutImage(notificationBuilder);
             }
+        } else {
+            // If imageUrl is null or empty, show the notification without the image
+            showNotificationWithoutImage(notificationBuilder);
         }
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
@@ -102,7 +117,7 @@ public class NotificationService extends FirebaseMessagingService {
         NotificationChannel channel = notificationManager.getNotificationChannel(channelId);
         if (channel == null) {
             channel = new NotificationChannel(channelId,
-                    "dcbud1939dnsu",
+                    "findoshop090",
                     NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(channel);
         }
@@ -116,5 +131,34 @@ public class NotificationService extends FirebaseMessagingService {
         notificationManager.notify(notificationId, notificationBuilder.build());
     }
 
+    private void showNotificationWithoutImage(NotificationCompat.Builder notificationBuilder) {
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        String channelId = "findoshop090"; // Assuming this is your channel ID
+
+        // Build the notification without the image
+        notificationBuilder.setSmallIcon(R.drawable.findo_logo)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+
+        // Create the default notification channel if it does not exist
+        NotificationChannel channel = notificationManager.getNotificationChannel(channelId);
+        if (channel == null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                channel = new NotificationChannel(channelId,
+                        "findoshop090",
+                        NotificationManager.IMPORTANCE_HIGH);
+            }
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        int notificationId = (int) System.currentTimeMillis();
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        notificationManager.notify(notificationId, notificationBuilder.build());
+    }
 
 }

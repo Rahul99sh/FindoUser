@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/_45sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.DashboardFragment">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:id="@+id/shimmer_frag">
+            <include layout="@layout/fragment_shimmer"/>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:id="@+id/scroll_view">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:context=".Dashboard">
+
+
+                <LinearLayout
+                    android:id="@+id/NavBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/_1sdp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_8sdp"
+                    android:weightSum="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:text="@string/university_of_rajasthan_jaipur"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/poppins_light"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/location" />
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/SearchBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:padding="@dimen/_10sdp"
+                        app:cardBackgroundColor="@color/blueBackgound"
+                        app:cardCornerRadius="@dimen/_4sdp"
+                        app:cardElevation="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_weight="0.1"
+                                android:contentDescription="@string/search"
+                                android:src="@drawable/ic_search" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_weight="0.8"
+                                android:hint="@string/search_here"
+                                android:textSize="@dimen/_15sdp" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_weight="0.1"
+                                android:contentDescription="@string/filter"
+                                android:src="@drawable/ic_filter" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+
+
+<!--                <com.smarteist.autoimageslider.SliderView-->
+<!--                    android:id="@+id/SliderStore"-->
+<!--                    android:layout_marginTop="@dimen/_10sdp"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="@dimen/_160sdp"-->
+<!--                    android:layout_marginStart="@dimen/_10sdp"-->
+<!--                    android:layout_marginEnd="@dimen/_10sdp"-->
+<!--                    android:layout_centerInParent="true"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/NavBar"-->
+<!--                    app:sliderAnimationDuration="600"-->
+<!--                    app:sliderAutoCycleDirection="back_and_forth"-->
+<!--                    app:sliderIndicatorAnimationDuration="600"-->
+<!--                    app:sliderIndicatorEnabled="true"-->
+<!--                    app:sliderIndicatorGravity="center_horizontal|bottom"-->
+<!--                    app:sliderIndicatorMargin="@dimen/_10sdp"-->
+<!--                    app:sliderIndicatorOrientation="horizontal"-->
+<!--                    app:sliderIndicatorPadding="@dimen/_1sdp"-->
+<!--                    app:sliderIndicatorRadius="@dimen/_1sdp"-->
+<!--                    app:sliderIndicatorSelectedColor="@color/featured"-->
+<!--                    app:sliderIndicatorUnselectedColor="@color/blueBackgound"-->
+<!--                    app:sliderScrollTimeInSec="1" />-->
+
+                <RelativeLayout
+                    android:id="@+id/connectivityrel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/NavBar">
+
+                    <TextView
+                        android:id="@+id/text1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:paddingStart="@dimen/_5sdp"
+                        android:paddingEnd="@dimen/_8sdp"
+                        android:paddingTop="1dp"
+                        android:paddingBottom="1dp"
+                        android:fontFamily="@font/poppins_light"
+                        android:text="@string/categories"
+                        android:textSize="@dimen/_15sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/seeMoreCategories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:text="@string/see_more"
+                        android:textColor="@color/blue_inactive" />
+
+
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/categoryRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/connectivityrel"
+                    tools:listitem="@layout/category_item" />
+
+                <RelativeLayout
+                    android:id="@+id/connectivityrel3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/categoryRv">
+
+                    <TextView
+                        android:id="@+id/text3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/poppins_light"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:textColor="@color/black"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="@string/featured_items"
+                        android:textSize="@dimen/_15sdp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/featuredRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_5sdp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/connectivityrel3"
+                    tools:listitem="@layout/featured_item" />
+
+
+
+                <RelativeLayout
+                    android:id="@+id/connectivityrel2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/featuredRv">
+
+                    <TextView
+                        android:id="@+id/text2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/poppins_light"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:paddingEnd="@dimen/_8sdp"
+                        android:textColor="@color/black"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="@string/nearest_store"
+                        android:textSize="@dimen/_15sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/seeALLStore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:text="@string/see_more"
+                        android:textColor="@color/blue_inactive" />
+
+
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/storeRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/connectivityrel2"
+                    tools:listitem="@layout/store_item"/>
+
+
+
+                <ImageView
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_160sdp"
+                    android:src="@drawable/registeryourshops"
+                    android:layout_centerInParent="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/storeRv"
+                    android:layout_marginTop="@dimen/_10sdp"
+                     />
+
+
+                <RelativeLayout
+                    android:id="@+id/connectivityrel123"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/slider">
+
+                    <TextView
+                        android:id="@+id/text9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:paddingStart="@dimen/_5sdp"
+                        android:paddingEnd="@dimen/_8sdp"
+                        android:paddingTop="1dp"
+                        android:paddingBottom="1dp"
+                        android:fontFamily="@font/poppins_light"
+                        android:text="@string/all_products"
+                        android:textSize="@dimen/_15sdp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/allItemsRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/connectivityrel123"
+                    tools:listitem="@layout/featured_item"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

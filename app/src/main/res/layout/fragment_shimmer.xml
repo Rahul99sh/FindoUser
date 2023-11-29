@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.DashboardFragment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:context=".Dashboard">
+
+
+                <RelativeLayout
+                    android:id="@+id/connectivityrel1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/text11"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:background="@color/shimmer_effect"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:paddingTop="3dp"
+                        android:paddingEnd="@dimen/_8sdp"
+                        android:paddingBottom="3dp"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/categoryRv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/connectivityrel1"
+                    tools:listitem="@layout/category_item">
+
+                    <include layout="@layout/category_item_shimmer"/>
+                    <include layout="@layout/category_item_shimmer"/>
+                    <include layout="@layout/category_item_shimmer"/>
+                    <include layout="@layout/category_item_shimmer"/>
+                    <include layout="@layout/category_item_shimmer"/>
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/connectivityrel31"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/categoryRv1">
+
+                    <TextView
+                        android:id="@+id/text31"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="sans-serif"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:textColor="@color/black"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:background="@color/shimmer_effect"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/featuredRv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_5sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/connectivityrel31"
+                    tools:listitem="@layout/featured_item" >
+                    <include layout="@layout/feature_shimmer"/>
+                    <include layout="@layout/feature_shimmer"/>
+                    <include layout="@layout/feature_shimmer"/>
+                </LinearLayout>
+
+
+
+                <RelativeLayout
+                    android:id="@+id/connectivityrel21"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/featuredRv1">
+
+                    <TextView
+                        android:id="@+id/text21"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_alignParentTop="true"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:textColor="@color/black"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:background="@color/shimmer_effect"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/storeRv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/connectivityrel21">
+
+                    <include layout="@layout/store_name_shimmer" />
+
+                    <include layout="@layout/store_name_shimmer" />
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

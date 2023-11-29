@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_60sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_10sdp"
+    android:layout_margin="@dimen/_6sdp"
+    app:strokeWidth="0.5dp"
+    app:strokeColor="#dbdce0"
+    android:elevation="0dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/shimmer_effect">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/storeImage"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:padding="@dimen/_4sdp"
+            android:src="@color/shimmer_effect"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/shimmer_effect"
+            android:paddingHorizontal="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            >
+
+            <TextView
+                android:id="@+id/storeName"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:background="@color/shimmer_effect"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/storeDist"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_width="@dimen/_90sdp"
+                android:drawablePadding="@dimen/_10sdp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_10sdp"
+                android:background="@color/shimmer_effect"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

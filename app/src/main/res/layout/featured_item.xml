@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="@dimen/_140sdp"
+android:layout_height="@dimen/_178sdp"
+    android:layout_marginStart="@dimen/_5sdp"
+tools:context=".MainActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="0dp"
+        app:strokeWidth="0.5dp"
+        app:strokeColor="#dbdce0"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".MainActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/topPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/tagLayout"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tilted_image1"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tag"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:rotation="314.8"
+                        android:text="@string/featured"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/_8sdp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/fav_img"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_50sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:src="@drawable/ic_white_heart"
+                    android:contentDescription="@string/fav_img" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/favLottie"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_50sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    app:srcCompat="@raw/heart"/>
+
+            </LinearLayout>
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/item_img"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:layout_marginTop="-15dp"
+                android:src="@drawable/category_fruit"
+
+                />
+
+            <TextView
+                android:id="@+id/item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxWidth="@dimen/_100sdp"
+                android:maxLines="1"
+                android:padding="@dimen/_2sdp"
+                android:text="@string/apple"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxWidth="@dimen/_100sdp"
+                android:maxLines="1"
+                android:padding="@dimen/_2sdp"
+                android:text="@string/_200_rs"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/addToCart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"
+                android:background="@color/textlight"
+                android:drawablePadding="@dimen/_5sdp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/_18sdp"
+                android:text="@string/add_to_cart"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="visible"
+                app:drawableStartCompat="@drawable/ic_cart" />
+
+            <TextView
+                android:id="@+id/removeFromCart"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@color/red_light"
+                android:drawablePadding="@dimen/_5sdp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/_18sdp"
+                android:text="@string/remove_from_cart"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="gone"
+                app:drawableStartCompat="@drawable/ic_deletetrash" />
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+<com.airbnb.lottie.LottieAnimationView
+    android:id="@+id/sparkleLottie"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:srcCompat="@raw/sparkle"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
