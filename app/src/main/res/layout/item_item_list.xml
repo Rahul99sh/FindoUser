@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_160sdp"
-    android:layout_marginStart="@dimen/_15sdp"
+    android:layout_marginStart="@dimen/_5sdp"
     android:layout_marginTop="@dimen/_5sdp"
-    android:layout_marginEnd="@dimen/_15sdp"
+    android:layout_marginEnd="@dimen/_5sdp"
     >
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardBackgroundColor="@android:color/transparent"
@@ -48,7 +48,7 @@
                         android:id="@+id/item_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
@@ -86,7 +86,7 @@
                     android:id="@+id/item_short_desc"
                     android:layout_width="@dimen/_125sdp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="start"
@@ -100,9 +100,9 @@
 
                 <TextView
                     android:id="@+id/item_price"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="start"
@@ -128,7 +128,6 @@
                     android:layout_height="@dimen/_120sdp"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="@dimen/_5sdp"
-                    app:cardBackgroundColor="#EBF3E8"
                     app:cardCornerRadius="@dimen/_12sdp"
                     app:cardElevation="0dp">
 
@@ -136,6 +135,8 @@
                         android:id="@+id/item_img"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:src="@drawable/apple"
+                        android:padding="@dimen/_5sdp"
                         android:backgroundTint="@android:color/transparent"
                         android:scaleType="centerCrop" />
                 </com.google.android.material.card.MaterialCardView>
@@ -159,6 +160,7 @@
                         android:background="@color/white"
                         android:gravity="center"
                         android:text="+"
+                        android:layout_marginTop="-2dp"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_24sdp"
                         android:visibility="visible" />
@@ -170,6 +172,7 @@
                         android:background="@color/white"
                         android:gravity="center"
                         android:text="-"
+                        android:layout_marginTop="-2dp"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_24sdp"
                         android:visibility="gone" />
@@ -181,7 +184,7 @@
 
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/sparkleLottie"

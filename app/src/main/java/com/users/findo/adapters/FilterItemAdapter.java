@@ -13,16 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.users.findo.dataClasses.CartDatabase;
-import com.users.findo.databaseClass.CartDb;
 import com.users.findo.R;
+import com.users.findo.dataClasses.Item;
+import com.users.findo.databaseClass.CartDb;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FilterItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private ArrayList<CartDatabase> filteredItemList;
+    private ArrayList<Item> filteredItemList;
     Context context;
 
     public interface ItemClickListener{
@@ -32,14 +32,14 @@ public class FilterItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         void ItemOnClick(MyNewViewHolder v, int position);
     }
 
-    public void setFilteredItemList(ArrayList<CartDatabase> storeList){
+    public void setFilteredItemList(ArrayList<Item> storeList){
         filteredItemList = storeList;
         notifyDataSetChanged();
     }
 
     ItemClickListener itemClickListener;
 
-    public FilterItemAdapter(Context context, ArrayList<CartDatabase> storeList, ItemClickListener itemClickListener){
+    public FilterItemAdapter(Context context, ArrayList<Item> storeList, ItemClickListener itemClickListener){
         filteredItemList = storeList;
         this.context = context;
         this.itemClickListener = itemClickListener;

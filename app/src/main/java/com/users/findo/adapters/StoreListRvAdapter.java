@@ -17,11 +17,12 @@ import com.users.findo.dataClasses.Store;
 import com.users.findo.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StoreListRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
-    private ArrayList<Store> mStoreList;
+    private List<Store> mStoreList;
     Context context;
 
     public interface ItemClickListener{
@@ -30,12 +31,12 @@ public class StoreListRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     ItemClickListener itemClickListener;
 
-    public void setFilteredItemList(ArrayList<Store> storeList){
+    public void setFilteredItemList(List<Store> storeList){
         mStoreList = storeList;
         notifyDataSetChanged();
     }
 
-    public StoreListRvAdapter(Context context,ArrayList<Store> storeList,ItemClickListener itemClickListener){
+    public StoreListRvAdapter(Context context,List<Store> storeList,ItemClickListener itemClickListener){
         mStoreList = storeList;
         this.context =context;
         this.itemClickListener = itemClickListener;
@@ -57,7 +58,7 @@ public class StoreListRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         //inserting data
         MyViewHolder viewHolder = (MyViewHolder) holder;
         viewHolder.storeName.setText(mStoreList.get(position).getStoreName());
-        viewHolder.storeDist.setText( mStoreList.get(position).getDistance().toString());
+        viewHolder.storeDist.setText( mStoreList.get(position).getDist() + " Km");
 
         RequestOptions options = new RequestOptions()
                 .centerCrop()

@@ -24,6 +24,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.users.findo.R;
 import com.users.findo.dataClasses.CartDatabase;
+import com.users.findo.dataClasses.Item;
 import com.users.findo.databaseClass.CartDb;
 import com.users.findo.databaseClass.FavDb;
 
@@ -31,26 +32,21 @@ import java.util.Objects;
 
 public class ItemsDetails extends AppCompatActivity {
 
-    String itemName;
-    String itemUrl;
-    String itemCategory1;
-    String itemTag,itemDesc,price;
     FirebaseFirestore rootRef;
 
     TextView itemNameTextView,itemStore,pricetext;
     ImageView itemImageView , backImage ,cartImage, share, fav;
     ConstraintLayout constraintLayout;
-    FrameLayout frameLayout;
     LinearLayout review;
     TextView addToCart;
-    public CartDatabase item;
     TextView remove,desc;
+    Item item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items_details);
-
+        item = getIntent().getParcelableExtra("item");
         rootRef = FirebaseFirestore.getInstance();
 
         itemNameTextView = findViewById(R.id.itemNameTxt);
@@ -63,81 +59,39 @@ public class ItemsDetails extends AppCompatActivity {
         fav=findViewById(R.id.favItem);
         review = findViewById(R.id.review);
         constraintLayout = findViewById(R.id.ItemDisc);
-        frameLayout = findViewById(R.id.container);
         desc = findViewById(R.id.itemDesc);
         itemStore = findViewById(R.id.itemStore);
 
-        String storeId = getIntent().getExtras().getString("storeId");
-        String itemId = getIntent().getExtras().getString("itemId");
-        String itemCategory = getIntent().getExtras().getString("itemCategory");
-
-
-        Dialog dialog1 = new Dialog(ItemsDetails.this);
-
-
-
-
-        if(new CartDb(ItemsDetails.this).itemExist(itemId)){
+        if(new CartDb(ItemsDetails.this).itemExist(item.getItemId())){
             addToCart.setVisibility(View.GONE);
             remove.setVisibility(View.VISIBLE);
         }
 
         FavDb favDb = new FavDb(ItemsDetails.this);
-        if(favDb.itemExist(itemId)){
+        if(favDb.itemExist(item.getItemId())){
             fav.setImageResource(R.drawable.ic_redheart);
         }else{
             fav.setImageResource(R.drawable.ic_white_heart);
         }
+        itemStore.setText(item.getStoreName());
 
 
+        desc.setText(item.getItemDescription());
+        pricetext.setText(item.getPrice());
+        itemNameTextView.setText(item.getItemName());
 
-        rootRef.collection("Store").document(storeId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task1) {
-
-                String storeName = Objects.requireNonNull(task1.getResult().get("StoreName")).toString();
-                String storeLat= Objects.requireNonNull(task1.getResult().get("StoreLat")).toString();
-                String storeLong= Objects.requireNonNull(task1.getResult().get("StoreLong")).toString();
-                String storeUrl = Objects.requireNonNull(task1.getResult().get("StoreUrl")).toString();
-                itemStore.setText(storeName);
-
-                rootRef.collection("Store").document(storeId).collection("Items").document(itemId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-
-                        itemCategory1 = Objects.requireNonNull(task.getResult().get("Category")).toString();
-                        itemName = Objects.requireNonNull(task.getResult().get("ItemName")).toString();
-                        itemUrl = Objects.requireNonNull(task.getResult().get("ItemUrl")).toString();
-                        itemTag = Objects.requireNonNull(task.getResult().get("ItemTag")).toString();
-                        itemDesc = Objects.requireNonNull(task.getResult().get("ItemDescription")).toString();
-                        price = Objects.requireNonNull(task.getResult().get("price")).toString();
-                        desc.setText(itemDesc);
-                        pricetext.setText(price);
-                        itemNameTextView.setText(itemName);
-
-                        RequestOptions options = new RequestOptions()
-                                .centerCrop()
-                                .error(R.drawable.ic_happy);
-                        Glide.with(ItemsDetails.this).load(itemUrl).apply(options).into(itemImageView);
-
-                        item = new CartDatabase(storeId,itemId,itemName,storeName,storeUrl,itemUrl,Double.parseDouble(storeLat),Double.parseDouble(storeLong),itemCategory1,itemTag,price);
-                    }
-                }).addOnFailureListener(e -> {
-
-                });
-            }
-        }).addOnFailureListener(e -> {
-
-        });
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .error(R.drawable.ic_happy);
+        Glide.with(ItemsDetails.this).load(item.getItemUrl()).apply(options).into(itemImageView);
 
 
 
         fav.setOnClickListener(view -> {
             FavDb favDb1 = new FavDb(ItemsDetails.this);
-            if(favDb1.itemExist(itemId)){
+            if(favDb1.itemExist(item.getItemId())){
                 //item is already in fav list -> remove it
-                favDb1.deleteItem(itemId);
+                favDb1.deleteItem(item.getItemId());
                 fav.setImageResource(R.drawable.ic_white_heart);
                 //notify data set changed
             }else{
@@ -158,40 +112,19 @@ public class ItemsDetails extends AppCompatActivity {
 
         remove.setOnClickListener(v -> {
             CartDb cartDb = new CartDb(ItemsDetails.this);
-            cartDb.deleteItem(itemId);
+            cartDb.deleteItem(item.getItemId());
             addToCart.setVisibility(View.VISIBLE);
             remove.setVisibility(View.GONE);
         });
 
         backImage.setOnClickListener(view -> {
-            if(constraintLayout.getVisibility()==View.VISIBLE){
-                finish();
-            }else{
-                constraintLayout.setVisibility(View.VISIBLE);
-                frameLayout.setVisibility(View.GONE);
-            }
+            finish();
         });
 
         cartImage = findViewById(R.id.cartBtn);
 
 
 
-    }
-    public void loadFrag(Fragment fragment){
-    FragmentManager fm = getSupportFragmentManager();
-    FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.container , fragment );
-        ft.commit();
-    }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if(constraintLayout.getVisibility()==View.VISIBLE){
-            finish();
-        }else{
-            constraintLayout.setVisibility(View.VISIBLE);
-            frameLayout.setVisibility(View.GONE);
-        }
     }
 
 

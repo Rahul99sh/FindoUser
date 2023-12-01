@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/_150sdp"
-    android:layout_height="@dimen/_60sdp"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_85sdp"
+    android:layout_height="@dimen/_95sdp"
     android:id="@+id/backCardCategory"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/_10sdp"
@@ -10,19 +10,18 @@
     android:layout_marginHorizontal="@dimen/_5sdp"
     android:layout_marginVertical="@dimen/_5sdp"
     android:backgroundTint="#1A53B175"
-    app:strokeColor="#B353B175"
     app:strokeWidth="1dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        android:gravity="center"
         >
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/categoryImage"
             android:layout_width="@dimen/_60sdp"
             android:layout_height="@dimen/_60sdp"
             android:padding="@dimen/_5sdp"
-            android:layout_marginStart="@dimen/_5sdp"
             android:src="@drawable/ic_launcher_background"
             android:layout_gravity="center"/>
         <TextView
@@ -34,8 +33,7 @@
             android:textSize="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_1sdp"
             android:text="@string/categories"
-            android:layout_marginStart="@dimen/_5sdp"
             android:layout_gravity="center"/>
     </LinearLayout>
 
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

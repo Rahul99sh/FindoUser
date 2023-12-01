@@ -9,11 +9,8 @@ public class CartDatabase {
     String ItemUrl;
     double StoreLat;
     double StoreLong;
-
     String ItemCategory;
-
     String ItemTag;
-
     String Price;
 
     public CartDatabase(){

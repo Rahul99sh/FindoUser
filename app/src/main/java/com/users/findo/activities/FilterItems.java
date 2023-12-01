@@ -1,5 +1,7 @@
 package com.users.findo.activities;
 
+import static com.users.findo.fragments.DashboardFragment.allItems;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,16 +14,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.users.findo.dataClasses.CartDatabase;
-import com.users.findo.dataClasses.Category;
-import com.users.findo.databaseClass.CartDb;
-import com.users.findo.databaseClass.SearchHistoryDb;
 import com.users.findo.R;
 import com.users.findo.adapters.CategoryFilters;
 import com.users.findo.adapters.FilterItemAdapter;
 import com.users.findo.adapters.SearchHistoryAdapter;
+import com.users.findo.dataClasses.Category;
+import com.users.findo.dataClasses.Item;
+import com.users.findo.databaseClass.CartDb;
+import com.users.findo.databaseClass.SearchHistoryDb;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class FilterItems extends AppCompatActivity {
@@ -29,8 +32,8 @@ public class FilterItems extends AppCompatActivity {
     ArrayList<String> searchHistory = new ArrayList<>();
     SearchView searchView;
     RelativeLayout searchHistoryLay;
-    ArrayList<CartDatabase> filteredItemList = new ArrayList<>();
-    ArrayList<CartDatabase> filteredItemList1 = new ArrayList<>();
+    ArrayList<Item> filteredItemList = new ArrayList<>();
+    ArrayList<Item> filteredItemList1 = new ArrayList<>();
 
     ArrayList<Category> categories = new ArrayList<>();
     @Override
@@ -93,9 +96,7 @@ public class FilterItems extends AppCompatActivity {
             @Override
             public void ItemOnClick(FilterItemAdapter.MyNewViewHolder v, int position) {
                 Intent intent = new Intent(FilterItems.this,ItemsDetails.class);
-                intent.putExtra("itemId",filteredItemList.get(position).getItemId());
-                intent.putExtra("itemCategory",filteredItemList.get(position).getItemCategory());
-                intent.putExtra("storeId",filteredItemList.get(position).getStoreId());
+                intent.putExtra("item",filteredItemList.get(position));
                 startActivity(intent);
             }
         });
@@ -126,7 +127,7 @@ public class FilterItems extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                ArrayList<CartDatabase> filteredItemList;
+                ArrayList<Item> filteredItemList;
                 filteredItemList = filterItems(newText);
                 adapter1.setFilteredItemList(filteredItemList);
                 adapter1.notifyDataSetChanged();
@@ -148,13 +149,13 @@ public class FilterItems extends AppCompatActivity {
     }
 
     //func to filter items
-    private ArrayList<CartDatabase> filterItems(String q){
+    private ArrayList<Item> filterItems(String q){
 
-        ArrayList<CartDatabase> items = null;
+        List<Item> items = allItems;
 
         filteredItemList.clear();
-        for(CartDatabase item : items){
-            if(item.getItemName().toLowerCase(Locale.ROOT).contains(q.toLowerCase(Locale.ROOT)) || item.getItemCategory().toLowerCase(Locale.ROOT).contains(q.toLowerCase(Locale.ROOT))
+        for(Item item : items){
+            if(item.getItemName().toLowerCase(Locale.ROOT).contains(q.toLowerCase(Locale.ROOT)) || item.getCategory().toLowerCase(Locale.ROOT).contains(q.toLowerCase(Locale.ROOT))
                     || item.getStoreName().toLowerCase(Locale.ROOT).contains(q.toLowerCase(Locale.ROOT))){
                 filteredItemList.add(item);
             }

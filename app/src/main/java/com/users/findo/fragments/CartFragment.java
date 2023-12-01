@@ -7,20 +7,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.users.findo.dataClasses.CartDatabase;
+import com.users.findo.dataClasses.Item;
 import com.users.findo.databaseClass.CartDb;
 import com.users.findo.R;
 import com.users.findo.adapters.CartListAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CartFragment extends Fragment {
 
-    private ArrayList<CartDatabase> cartLists = new ArrayList<>();
+    private List<Item> cartLists = new ArrayList<>();
     private RecyclerView cartRv;
 
     private LinearLayout  cartEmpty;
@@ -52,7 +55,7 @@ public class CartFragment extends Fragment {
         CartDb cartDb = new CartDb(requireContext());
         cartLists = cartDb.getData();
 
-
+        Toast.makeText(requireContext(), String.valueOf(cartLists.size()), Toast.LENGTH_SHORT).show();
         CartListAdapter adapter = new CartListAdapter(requireContext(),cartLists, position -> {
             cartDb.deleteItem(cartLists.get(position).getItemId());
             cartLists.remove(position);

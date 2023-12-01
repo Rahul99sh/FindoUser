@@ -14,6 +14,7 @@ import com.users.findo.MainActivity;
 import com.users.findo.R;
 import com.users.findo.bottomSheets.LoadingSheet;
 import com.users.findo.databinding.ActivityRegistrationBinding;
+import com.users.findo.security.Crypto;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -45,7 +46,7 @@ public class Registration extends AppCompatActivity {
         String email = Objects.requireNonNull(binding.email.getText()).toString();
         String password = Objects.requireNonNull(binding.password.getText()).toString();
         String cpassword = Objects.requireNonNull(binding.cPassword.getText()).toString();
-
+        Crypto crypto = new Crypto();
         if(TextUtils.isEmpty(email)){
             binding.emailBox.setError("Email cannot be empty");
             binding.email.requestFocus();
@@ -61,9 +62,12 @@ public class Registration extends AppCompatActivity {
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if(task.isSuccessful()){
                     HashMap<String,String> mp = new HashMap<>();
-                    mp.put("OwnerId", Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
-                    mp.put("email", email);
-                    db.collection("ShopOwners").document(mAuth.getCurrentUser().getUid()).set(mp).addOnCompleteListener(task1 -> {
+                    mp.put("userId", Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+                    mp.put("email", crypto.encrypt(email));
+                    mp.put("name", crypto.encrypt(email));
+                    mp.put("image", crypto.encrypt(email));
+                    mp.put("referralCode", crypto.encrypt(email));
+                    db.collection("Users").document(mAuth.getCurrentUser().getUid()).set(mp).addOnCompleteListener(task1 -> {
                         loadingSheet.dismiss();
                         Toast.makeText(Registration.this , "Registered successfully" , Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Registration.this, MainActivity.class)); // redirecting to login page

@@ -7,12 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.users.findo.dataClasses.CartDatabase;
+import com.users.findo.dataClasses.Item;
 
 import java.util.ArrayList;
 
 public class FavDb extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "FindoFav.db";
+    private static final String DATABASE_NAME = "FindoUsersFav.db";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "Fav";
     private static final String ITEM_CATEGORY = "Category";
@@ -47,12 +48,12 @@ public class FavDb extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertData(ArrayList<CartDatabase> data) {
+    public void insertData(ArrayList<Item> data) {
         SQLiteDatabase db = getWritableDatabase();
         for (int i = 0; i < data.size(); i++) {
-            CartDatabase cart = data.get(i);
+            Item cart = data.get(i);
             ContentValues values = new ContentValues();
-            values.put(STORE_ID, cart.getStoreId());
+            values.put(STORE_ID, cart.getStoreID());
             values.put(STORE_NAME, cart.getStoreName());
             values.put(STORE_IMAGE, cart.getStoreUrl());
             values.put(STORE_LAT, cart.getStoreLat());
@@ -60,7 +61,7 @@ public class FavDb extends SQLiteOpenHelper {
             values.put(ITEM_ID, cart.getItemId());
             values.put(ITEM_IMAGE, cart.getItemUrl());
             values.put(ITEM_NAME, cart.getItemName());
-            values.put(ITEM_CATEGORY, cart.getItemCategory());
+            values.put(ITEM_CATEGORY, cart.getCategory());
             values.put(ITEM_TAG, cart.getItemTag());
             values.put(ITEM_PRICE, cart.getPrice());
             db.insert(TABLE_NAME, null, values);
@@ -68,10 +69,10 @@ public class FavDb extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void insertOneItem( CartDatabase cart){
+    public void insertOneItem( Item cart){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(STORE_ID, cart.getStoreId());
+        values.put(STORE_ID, cart.getStoreID());
         values.put(STORE_NAME, cart.getStoreName());
         values.put(STORE_IMAGE, cart.getStoreUrl());
         values.put(STORE_LAT, cart.getStoreLat());
@@ -79,7 +80,7 @@ public class FavDb extends SQLiteOpenHelper {
         values.put(ITEM_ID, cart.getItemId());
         values.put(ITEM_IMAGE, cart.getItemUrl());
         values.put(ITEM_NAME, cart.getItemName());
-        values.put(ITEM_CATEGORY, cart.getItemCategory());
+        values.put(ITEM_CATEGORY, cart.getCategory());
         values.put(ITEM_TAG, cart.getItemTag());
         values.put(ITEM_PRICE, cart.getPrice());
         db.insert(TABLE_NAME, null, values);

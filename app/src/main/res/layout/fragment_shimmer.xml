@@ -7,38 +7,78 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.DashboardFragment">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 tools:context=".Dashboard">
 
-
-                <RelativeLayout
-                    android:id="@+id/connectivityrel1"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_margin="@dimen/_15sdp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_100sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@drawable/circle_1"
 
-                    <TextView
-                        android:id="@+id/text11"
-                        android:layout_width="@dimen/_150sdp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="@dimen/_150sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:background="@color/shimmer_effect"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:maxLines="1"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:padding="@dimen/_2sdp"
+                            /><TextView
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_8sdp"
                         android:background="@color/shimmer_effect"
-                        android:paddingStart="@dimen/_8sdp"
-                        android:paddingTop="3dp"
-                        android:paddingEnd="@dimen/_8sdp"
-                        android:paddingBottom="3dp"
+                        android:maxWidth="@dimen/_100sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/_12sdp"
+                        android:maxLines="1"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:padding="@dimen/_2sdp"
+                        /><TextView
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_8sdp"
+                        android:background="@color/shimmer_effect"
+                        android:maxWidth="@dimen/_100sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:maxLines="1"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:padding="@dimen/_2sdp"
+                        />
+                    </LinearLayout>
+                </LinearLayout>
 
-
-                </RelativeLayout>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/connectivityrel1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    android:layout_margin="@dimen/_15sdp"
+                    app:cardBackgroundColor="@color/greytext"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="19dp" />
 
                 <LinearLayout
                     android:id="@+id/categoryRv1"
@@ -49,6 +89,7 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_4sdp"
+                    android:gravity="center"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/connectivityrel1"
@@ -57,37 +98,7 @@
                     <include layout="@layout/category_item_shimmer"/>
                     <include layout="@layout/category_item_shimmer"/>
                     <include layout="@layout/category_item_shimmer"/>
-                    <include layout="@layout/category_item_shimmer"/>
-                    <include layout="@layout/category_item_shimmer"/>
                 </LinearLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/connectivityrel31"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/categoryRv1">
-
-                    <TextView
-                        android:id="@+id/text31"
-                        android:layout_width="@dimen/_150sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_alignParentTop="true"
-                        android:fontFamily="sans-serif"
-                        android:paddingStart="@dimen/_8sdp"
-                        android:textColor="@color/black"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:background="@color/shimmer_effect"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </RelativeLayout>
 
 
                 <LinearLayout
@@ -156,6 +167,6 @@
                 </LinearLayout>
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
 </FrameLayout>

@@ -41,7 +41,7 @@ public class FirstScreen extends AppCompatActivity {
             if(mUser != null) {
                 i = new Intent(FirstScreen.this, MainActivity.class);
             }else{
-                i = new Intent(FirstScreen.this, Onboarding.class);
+                i = new Intent(FirstScreen.this, MainActivity.class);
             }
             startActivity(i);
             overridePendingTransition(R.anim.no_animation, R.anim.fade_out);

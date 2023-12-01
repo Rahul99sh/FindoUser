@@ -14,17 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.users.findo.dataClasses.CartDatabase;
+import com.users.findo.R;
+import com.users.findo.dataClasses.Item;
 import com.users.findo.databaseClass.CartDb;
 import com.users.findo.databaseClass.FavDb;
-import com.users.findo.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ItemListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     Context context;
-    ArrayList<CartDatabase> itemList ;
+    List<Item> itemList ;
     ItemClickListener clickListener;
 
     public interface ItemClickListener{
@@ -35,7 +35,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         void ItemOnClick(MyViewHolder v, int position);
     }
 
-    public ItemListAdapter(Context context,ArrayList<CartDatabase> itemList,ItemClickListener clickListener){
+    public ItemListAdapter(Context context,List<Item> itemList,ItemClickListener clickListener){
         this.context = context;
         this.itemList = itemList;
         this.clickListener = clickListener;

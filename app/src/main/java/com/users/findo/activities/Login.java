@@ -58,7 +58,7 @@ public class Login extends AppCompatActivity {
             loadingSheet.show(getSupportFragmentManager(), loadingSheet.getTag());
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener((OnCompleteListener<AuthResult>) task -> {
                 if (task.isSuccessful()) {
-                    db.collection("ShopOwners").document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    db.collection("Users").document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             loadingSheet.dismiss();
@@ -67,13 +67,13 @@ public class Login extends AppCompatActivity {
                                 startActivity(i);
                                 finish();
                             }else{
-                                Toast.makeText(Login.this, "This Account is not associated with Findo Shop", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, "This Account is not associated with Findo", Toast.LENGTH_SHORT).show();
                                 mAuth.signOut();
                             }
                         }
                     }).addOnFailureListener(e -> {
                         loadingSheet.dismiss();
-                        Toast.makeText(Login.this, "This Account is not associated with Findo Shop", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "This Account is not associated with Findo", Toast.LENGTH_SHORT).show();
                         mAuth.signOut();
                     });
                 } else {

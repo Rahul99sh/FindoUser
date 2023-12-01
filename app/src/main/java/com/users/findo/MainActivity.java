@@ -29,8 +29,8 @@ import com.users.findo.fragments.FavoritesFragment;
 import com.users.findo.viewModels.RetUser;
 
 public class MainActivity extends AppCompatActivity {
-    RetUser userViewModel;
-    User user;
+//    RetUser userViewModel;
+//    User user;
     ActivityMainBinding binding;
     public static ChipNavigationBar chipNavigationBar;
     public DrawerLayout drawerLayout;
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        userViewModel = new ViewModelProvider(this).get(RetUser.class);
+//        userViewModel = new ViewModelProvider(this).get(RetUser.class);
         drawerLayout = findViewById(R.id.my_drawer_layout);
         ImageView menu = findViewById(R.id.menu);
 

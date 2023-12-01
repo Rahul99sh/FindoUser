@@ -15,16 +15,18 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.users.findo.dataClasses.CartDatabase;
+import com.users.findo.dataClasses.Item;
 import com.users.findo.databaseClass.CartDb;
 import com.users.findo.databaseClass.FavDb;
 import com.users.findo.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FeaturedItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     Context context;
-    ArrayList<CartDatabase> itemList ;
+    List<Item> itemList ;
 
     FeaturedItemListener clickListener;
 
@@ -36,7 +38,7 @@ public class FeaturedItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         void ItemOnClick(MyViewHolder v, int position);
     }
 
-    public FeaturedItemAdapter(Context context,ArrayList<CartDatabase> itemList,FeaturedItemListener clickListener){
+    public FeaturedItemAdapter(Context context,List<Item> itemList,FeaturedItemListener clickListener){
         this.context = context;
         this.itemList = itemList;
         this.clickListener = clickListener;

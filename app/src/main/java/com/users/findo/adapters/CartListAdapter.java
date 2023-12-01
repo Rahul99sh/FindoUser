@@ -16,12 +16,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.users.findo.dataClasses.CartDatabase;
 import com.users.findo.R;
+import com.users.findo.dataClasses.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CartListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private  ArrayList<CartDatabase> cartArrayList;
+    private List<Item> cartArrayList;
     private Context context;
 
 
@@ -30,7 +32,7 @@ public class CartListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     RemoveItemClicked removeItemClicked;
-    public CartListAdapter( Context context,ArrayList<CartDatabase> cartArrayList,RemoveItemClicked removeItemClicked) {
+    public CartListAdapter( Context context,List<Item> cartArrayList,RemoveItemClicked removeItemClicked) {
         this.context = context;
         this.cartArrayList = cartArrayList;
         this.removeItemClicked = removeItemClicked;

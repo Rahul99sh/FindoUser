@@ -1,4 +1,5 @@
 package com.users.findo.adapters;
+
 import android.content.Context;
 import android.os.Vibrator;
 import android.view.LayoutInflater;
@@ -13,19 +14,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.users.findo.dataClasses.CartDatabase;
+import com.users.findo.R;
+import com.users.findo.dataClasses.Item;
 import com.users.findo.databaseClass.CartDb;
 import com.users.findo.databaseClass.FavDb;
-import com.users.findo.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class allItemsRvAdapter extends RecyclerView.Adapter<allItemsRvAdapter.MyViewHolder1> {
 
 
     Context context;
-    ArrayList<CartDatabase> itemList = null;
-
+    List<Item> itemList;
     AllItemListener clickListener;
 
 
@@ -37,9 +37,9 @@ public class allItemsRvAdapter extends RecyclerView.Adapter<allItemsRvAdapter.My
         void ItemOnClick(MyViewHolder1 v, int position);
     }
 
-    public allItemsRvAdapter(Context context,ArrayList<CartDatabase> itemList,AllItemListener clickListener){
+    public allItemsRvAdapter(Context context, List<Item> itemList, AllItemListener clickListener){
         this.context = context;
-//        this.itemList = itemList;
+        this.itemList = itemList;
         this.clickListener = clickListener;
     }
 
