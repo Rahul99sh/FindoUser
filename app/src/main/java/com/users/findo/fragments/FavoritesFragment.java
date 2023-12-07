@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.users.findo.dataClasses.CartDatabase;
+import com.users.findo.dataClasses.Item;
 import com.users.findo.databaseClass.CartDb;
 import com.users.findo.databaseClass.FavDb;
 import com.users.findo.R;
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 
 public class FavoritesFragment extends Fragment {
 
-    ArrayList<CartDatabase> favList = new ArrayList<>();
+    ArrayList<Item> favList = new ArrayList<>();
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -57,55 +59,55 @@ public class FavoritesFragment extends Fragment {
             startActivity(intent);
         });
 
-//        favRv.setLayoutManager(new GridLayoutManager(requireContext(),2));
+        favRv.setLayoutManager(new GridLayoutManager(requireContext(),2));
 
-//        ItemListAdapter adapter = new ItemListAdapter(requireContext(), favList, new ItemListAdapter.ItemClickListener() {
-//            @Override
-//            public void FavItemOnClick(ItemListAdapter.MyViewHolder v, int position) {
-//                FavDb favDb = new FavDb(requireContext());
-//                if(favDb.itemExist(favList.get(position).getItemId())){
-//                    //item is already in fav list -> remove it
-//                    favDb.deleteItem(favList.get(position).getItemId());
-//                    favList.remove(position);
-//                    //notify data set changed
-//                    v.favImage.setImageResource(R.drawable.ic_white_heart);
-//                    if(favList.isEmpty()){
-//                        favRv.setVisibility(View.GONE);
-//                        favEmpty.setVisibility(View.VISIBLE);
-//                        startSearch.setVisibility(View.VISIBLE);
-//                        favtext.setVisibility(View.GONE);
-//                    }
+        ItemListAdapter adapter = new ItemListAdapter(requireContext(), favList, new ItemListAdapter.ItemClickListener() {
+            @Override
+            public void FavItemOnClick(ItemListAdapter.MyViewHolder v, int position) {
+                FavDb favDb = new FavDb(requireContext());
+                if(favDb.itemExist(favList.get(position).getItemId())){
+                    //item is already in fav list -> remove it
+                    favDb.deleteItem(favList.get(position).getItemId());
+                    favList.remove(position);
+                    //notify data set changed
+                    v.favImage.setImageResource(R.drawable.ic_white_heart);
+                    if(favList.isEmpty()){
+                        favRv.setVisibility(View.GONE);
+                        favEmpty.setVisibility(View.VISIBLE);
+                        startSearch.setVisibility(View.VISIBLE);
+                        favtext.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void AddToCartItemOnClick(ItemListAdapter.MyViewHolder v, int position) {
+                CartDb cartDb = new CartDb(requireContext());
+//                if(!cartDb.itemExist(favList.get(position).getItemId())){
+//                    cartDb.insertOneItem(new CartDatabase(favList.get(position).getStoreId(),favList.get(position).getItemId()
+//                            ,favList.get(position).getItemName(),favList.get(position).getStoreName(),favList.get(position).getStoreUrl(),favList.get(position).getItemUrl()
+//                            ,favList.get(position).getStoreLat(),favList.get(position).getStoreLong(), favList.get(position).getItemCategory(), favList.get(position).getItemTag(), favList.get(position).getPrice()));
+//                    v.addToCart.setVisibility(View.GONE);
+//                    v.removeFromCart.setVisibility(View.VISIBLE);
 //                }
-//            }
-//
-//            @Override
-//            public void AddToCartItemOnClick(ItemListAdapter.MyViewHolder v, int position) {
-//                CartDb cartDb = new CartDb(requireContext());
-////                if(!cartDb.itemExist(favList.get(position).getItemId())){
-////                    cartDb.insertOneItem(new CartDatabase(favList.get(position).getStoreId(),favList.get(position).getItemId()
-////                            ,favList.get(position).getItemName(),favList.get(position).getStoreName(),favList.get(position).getStoreUrl(),favList.get(position).getItemUrl()
-////                            ,favList.get(position).getStoreLat(),favList.get(position).getStoreLong(), favList.get(position).getItemCategory(), favList.get(position).getItemTag(), favList.get(position).getPrice()));
-////                    v.addToCart.setVisibility(View.GONE);
-////                    v.removeFromCart.setVisibility(View.VISIBLE);
-////                }
-//            }
-//
-//            @Override
-//            public void RemoveFromCartItemOnClick(ItemListAdapter.MyViewHolder v, int position) {
-//                CartDb cartDb = new CartDb(requireContext());
-//                if(cartDb.itemExist(favList.get(position).getItemId())) {
-//                    cartDb.deleteItem(favList.get(position).getItemId());
-//                    v.addToCart.setVisibility(View.VISIBLE);
-//                    v.removeFromCart.setVisibility(View.GONE);
-//                }
-//            }
-//
-//            @Override
-//            public void ItemOnClick(ItemListAdapter.MyViewHolder v, int position) {
-//
-//            }
-//        });
-//        favRv.setAdapter(adapter);
+            }
+
+            @Override
+            public void RemoveFromCartItemOnClick(ItemListAdapter.MyViewHolder v, int position) {
+                CartDb cartDb = new CartDb(requireContext());
+                if(cartDb.itemExist(favList.get(position).getItemId())) {
+                    cartDb.deleteItem(favList.get(position).getItemId());
+                    v.addToCart.setVisibility(View.VISIBLE);
+                    v.removeFromCart.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void ItemOnClick(ItemListAdapter.MyViewHolder v, int position) {
+
+            }
+        });
+        favRv.setAdapter(adapter);
 
         if(!favList.isEmpty()){
             favRv.setVisibility(View.VISIBLE);

@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,6 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Findo"
         tools:targetApi="31">
+        <activity
+            android:name=".activities.GeneralDashboard"
+            android:exported="false" />
+        <activity
+            android:name=".activities.GroceryDashboard"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/findo_logo" />
@@ -25,6 +33,7 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="findoshop090" />
+
         <service
             android:name=".NotificationService"
             android:exported="false">
@@ -32,6 +41,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".activities.Profile"
+            android:exported="false" />
         <activity
             android:name=".activities.ContactUs"
             android:exported="false" />
@@ -49,25 +62,25 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".activities.Onboarding"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".activities.Registration"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".activities.FilterItems"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".activities.ItemsDetails"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".activities.AllStores"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".activities.StoreDetails"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>

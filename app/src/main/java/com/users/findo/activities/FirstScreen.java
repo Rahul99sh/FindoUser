@@ -24,24 +24,12 @@ public class FirstScreen extends AppCompatActivity {
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         logo = findViewById(R.id.logo);
 
-        String message = "this is findo app"; // Replace with your actual message
-
-        Crypto crypto = new Crypto();
-
-// Encryption
-        String encryptedMessage = crypto.encrypt(message);
-        Log.d("ENCRYPTED", "Encrypted message: " + encryptedMessage);
-
-// Decryption
-        String decryptedMessage = crypto.decrypt(encryptedMessage);
-        Log.d("DECRYPTED", "Decrypted message: " + decryptedMessage);
-
         new Handler().postDelayed(() -> {
             Intent i;
             if(mUser != null) {
                 i = new Intent(FirstScreen.this, MainActivity.class);
             }else{
-                i = new Intent(FirstScreen.this, MainActivity.class);
+                i = new Intent(FirstScreen.this, Onboarding.class);
             }
             startActivity(i);
             overridePendingTransition(R.anim.no_animation, R.anim.fade_out);

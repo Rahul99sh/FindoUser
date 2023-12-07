@@ -63,6 +63,7 @@ public class allItemsRvAdapter extends RecyclerView.Adapter<allItemsRvAdapter.My
     @Override
     public void onBindViewHolder(@NonNull allItemsRvAdapter.MyViewHolder1 holder, int position) {
         holder.ItemName.setText(itemList.get(holder.getAdapterPosition()).getItemName());
+        holder.desc.setText(itemList.get(holder.getAdapterPosition()).getItemDescription());
         holder.price.setText(itemList.get(holder.getAdapterPosition()).getPrice() + " Rs");
 
         // Get a reference to the system vibrator service
@@ -118,7 +119,7 @@ public class allItemsRvAdapter extends RecyclerView.Adapter<allItemsRvAdapter.My
 
             TextView ItemName;
             ImageView ImageUrl;
-            public TextView addToCart;
+            public TextView addToCart,desc;
             public TextView removeFromCart,price;
             public LottieAnimationView heart  ;
             public  LottieAnimationView sparkle  ;
@@ -129,6 +130,7 @@ public class allItemsRvAdapter extends RecyclerView.Adapter<allItemsRvAdapter.My
                 super(itemView);
 
                 ItemName = itemView.findViewById(R.id.item_name);
+                desc = itemView.findViewById(R.id.item_short_desc);
                 ImageUrl = itemView.findViewById(R.id.item_img);
                 addToCart = itemView.findViewById(R.id.addToCart);
                 removeFromCart = itemView.findViewById(R.id.removeFromCart);

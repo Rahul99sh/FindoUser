@@ -1,38 +1,22 @@
 package com.users.findo.activities;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
-import android.os.Looper;
 import android.view.View;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.users.findo.dataClasses.Store;
 import com.users.findo.R;
 import com.users.findo.adapters.StoreListRvAdapter;
+import com.users.findo.dataClasses.Store;
 import com.users.findo.viewModels.StoreViewModel;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 public class AllStores extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -47,22 +31,35 @@ public class AllStores extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_stores);
+        String filter = getIntent().getStringExtra("filter");
         recyclerView = findViewById(R.id.AllStores_rv);
         searchView =findViewById(R.id.AllStores_searchView);
         storeViewModel = new ViewModelProvider(this).get(StoreViewModel.class);
         storeViewModel.getLiveStoreData().observe(this,stores -> {
             this.storeList = stores;
-            adapter = new StoreListRvAdapter(this, stores, (v, position) -> {
-                Intent i = new Intent(AllStores.this, StoreDetails.class);
-                i.putExtra("store",stores.get(position));
-                startActivity(i);
-            });
+            if(filter == null || filter.isEmpty()){
+                adapter = new StoreListRvAdapter(this, stores, (v, position) -> {
+                    Intent i = new Intent(AllStores.this, StoreDetails.class);
+                    i.putExtra("store",stores.get(position));
+                    startActivity(i);
+                });
+            }else{
+                List<Store> filteredSores = new ArrayList<>();
+                for (Store s :
+                        stores) {
+                    if(filter.equals("Grocery") && (s.getCategory().equals(filter) || s.getCategory().equals("General Store"))){
+                        filteredSores.add(s);
+                    }else if(s.getCategory().equals(filter)) filteredSores.add(s);
+                }
+                adapter = new StoreListRvAdapter(this, filteredSores, (v, position) -> {
+                    Intent i = new Intent(AllStores.this, StoreDetails.class);
+                    i.putExtra("store",stores.get(position));
+                    startActivity(i);
+                });
+            }
+
             recyclerView.setAdapter(adapter);
         });
-
-
-
-
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

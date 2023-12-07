@@ -16,14 +16,15 @@ public class Store implements Parcelable {
     private boolean verified;
     private Double StoreLong;
     private String StoreUrl;
-    private String OwnerId,address,gstin,licenceNo;
+    private String OwnerId,address,gstin,licenceNo,category;
     private String StoreId;
     public Store() {}
 
-    public Store(List<String> promoIds, String storeName, Double storeLat, Double rating, int visits, boolean verified, Double storeLong, String storeUrl, String ownerId, String address, String gstin, String licenceNo, String storeId, float dist) {
+    public Store(List<String> promoIds, String storeName, Double storeLat, float dist, Double rating, int visits, boolean verified, Double storeLong, String storeUrl, String ownerId, String address, String gstin, String licenceNo, String category, String storeId) {
         this.promoIds = promoIds;
         StoreName = storeName;
         StoreLat = storeLat;
+        this.dist = dist;
         this.rating = rating;
         this.visits = visits;
         this.verified = verified;
@@ -33,8 +34,16 @@ public class Store implements Parcelable {
         this.address = address;
         this.gstin = gstin;
         this.licenceNo = licenceNo;
+        this.category = category;
         StoreId = storeId;
-        this.dist = dist;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public Double getRating() {
@@ -178,6 +187,7 @@ public class Store implements Parcelable {
         licenceNo = in.readString();
         StoreId = in.readString();
         dist = in.readFloat();
+        category = in.readString();
     }
 
     public static final Creator<Store> CREATOR = new Creator<Store>() {
@@ -229,6 +239,7 @@ public class Store implements Parcelable {
         dest.writeString(gstin);
         dest.writeString(licenceNo);
         dest.writeString(StoreId);
+        dest.writeString(category);
         dest.writeFloat(dist);
     }
 }

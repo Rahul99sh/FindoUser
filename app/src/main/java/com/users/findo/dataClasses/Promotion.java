@@ -5,7 +5,7 @@ import com.google.firebase.Timestamp;
 public class Promotion {
     String promoId;
     double amount;
-    String imageUrl,orderId,storeId;
+    String imageUrl,orderId,storeId, category;
     boolean paymentStatus;
     Timestamp startDate, endDate;
 
@@ -13,15 +13,24 @@ public class Promotion {
 
     }
 
-    public Promotion(String promoId, double amount, String imageUrl, String orderId, String storeId, boolean paymentStatus, Timestamp startDate, Timestamp endDate) {
+    public Promotion(String promoId, double amount, String imageUrl, String orderId, String storeId, String category, boolean paymentStatus, Timestamp startDate, Timestamp endDate) {
         this.promoId = promoId;
         this.amount = amount;
         this.imageUrl = imageUrl;
         this.orderId = orderId;
         this.storeId = storeId;
+        this.category = category;
         this.paymentStatus = paymentStatus;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public double getAmount() {

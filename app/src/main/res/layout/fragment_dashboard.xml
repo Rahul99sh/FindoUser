@@ -11,7 +11,7 @@
         <com.facebook.shimmer.ShimmerFrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/shimmer_frag">
             <include layout="@layout/fragment_shimmer"/>
 
@@ -19,7 +19,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/main_view">
 
 
@@ -130,6 +130,35 @@
                         android:layout_height="@dimen/_22sdp"/>
                 </LinearLayout>
 
+                <RelativeLayout
+                    android:id="@+id/connectivityrel51"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_slider_top">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/poppins_light"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:paddingEnd="@dimen/_8sdp"
+                        android:textColor="@color/black"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="@string/explore_by_categories"
+                        android:textSize="@dimen/_15sdp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
 <!--Category-->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/categoryRv"
@@ -143,49 +172,9 @@
                     app:spanCount="3"
                     tools:itemCount="9"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_slider_top"
+                    app:layout_constraintTop_toBottomOf="@+id/connectivityrel51"
                     tools:listitem="@layout/category_item" />
-<!--Featured Items-->
-                <RelativeLayout
-                    android:id="@+id/connectivityrel3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/categoryRv">
 
-                    <TextView
-                        android:id="@+id/text3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_alignParentTop="true"
-                        android:fontFamily="@font/poppins_light"
-                        android:paddingStart="@dimen/_8sdp"
-                        android:textColor="@color/black"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:text="@string/featured_items"
-                        android:textSize="@dimen/_15sdp"
-                        android:textStyle="bold" />
-
-                </RelativeLayout>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/featuredRv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_5sdp"
-                    android:nestedScrollingEnabled="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@+id/connectivityrel3"
-                    tools:listitem="@layout/featured_item" />
 
 
 <!--Stores-->
@@ -197,7 +186,7 @@
                     android:gravity="center"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/featuredRv">
+                    app:layout_constraintTop_toBottomOf="@+id/categoryRv">
 
                     <TextView
                         android:id="@+id/text2"
@@ -257,21 +246,33 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     />
 
-<!--New Items-->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/allItemsRv"
+                <TextView
+                    android:id="@+id/slogan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/_45sdp"
+                    android:fontFamily="@font/logofont"
+                    android:textSize="@dimen/_35sdp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_50sdp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:nestedScrollingEnabled="false"
-                    tools:itemCount="5"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/slider"
-                    tools:listitem="@layout/item_item_list"/>
+                    app:layout_constraintTop_toBottomOf="@id/slider"
+                    android:text="@string/find_faster_nshop_smarter"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/slogan"
+                    android:text="@string/made_with_10084_in_india"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

@@ -1,5 +1,6 @@
 package com.users.findo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
+import com.users.findo.activities.Profile;
 import com.users.findo.dataClasses.User;
 import com.users.findo.databinding.ActivityMainBinding;
 import com.users.findo.fragments.CartFragment;
@@ -40,13 +42,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-//        userViewModel = new ViewModelProvider(this).get(RetUser.class);
+
         drawerLayout = findViewById(R.id.my_drawer_layout);
-        ImageView menu = findViewById(R.id.menu);
+        binding.profile.setOnClickListener(v -> {
+            startActivity(new Intent(this, Profile.class));
+        });
 
 
-
-        menu.setOnClickListener(new View.OnClickListener() {
+        binding.menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(drawerLayout.isDrawerOpen(GravityCompat.START)) {

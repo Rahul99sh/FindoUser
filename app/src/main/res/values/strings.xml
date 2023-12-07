@@ -27,7 +27,6 @@
     <string name="ad_unit_id_banner">ca-app-pub-9956624827890463/5814508775</string>
 
 
-
     <string name="otp_verification">OTP Verification</string>
     <string name="we_will_send_you_an_one_time_password_on_this_mobile_number">We will send you an One Time Password on this mobile number</string>
     <string name="_84">+91 - </string>
@@ -95,5 +94,13 @@
     <string name="search_here">Search here...</string>
     <string name="filter">filter</string>
     <string name="all_products">All Products</string>
+    <string name="email">Email :</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="logout">Logout</string>
+    <string name="referral_code">Referral Code :</string>
+    <string name="explore_by_categories">Explore By Categories</string>
+    <string name="find_faster_nshop_smarter">Find Faster \nShop Smarter !</string>
+    <string name="made_with_10084_in_india">Made with ❤ in INDIA</string>
+
 
 </resources>

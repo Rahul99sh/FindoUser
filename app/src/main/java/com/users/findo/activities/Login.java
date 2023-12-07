@@ -3,6 +3,7 @@ package com.users.findo.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.users.findo.MainActivity;
 import com.users.findo.R;
 import com.users.findo.bottomSheets.LoadingSheet;
@@ -63,6 +65,17 @@ public class Login extends AppCompatActivity {
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             loadingSheet.dismiss();
                             if(documentSnapshot.exists()){
+                                FirebaseMessaging.getInstance().getToken()
+                                        .addOnCompleteListener(task1 -> {
+                                            if (!task1.isSuccessful()) {
+                                                return;
+                                            }
+                                            // Get new FCM registration token
+                                            String registrationToken = task1.getResult();
+                                            Log.d("token",registrationToken);
+                                            db.collection("Users").document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).update("deviceToken", registrationToken);
+
+                                        });
                                 Intent i = new Intent(Login.this, MainActivity.class);
                                 startActivity(i);
                                 finish();

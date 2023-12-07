@@ -31,23 +31,18 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
-import com.google.firebase.Timestamp;
 import com.users.findo.R;
 import com.users.findo.activities.AllStores;
 import com.users.findo.activities.FilterItems;
-import com.users.findo.activities.ItemsDetails;
 import com.users.findo.activities.StoreDetails;
-import com.users.findo.adapters.FeaturedItemAdapter;
+import com.users.findo.adapters.CategoryAdapter;
 import com.users.findo.adapters.SliderAdapter;
 import com.users.findo.adapters.StoreListRvAdapter;
-import com.users.findo.adapters.allItemsRvAdapter;
-import com.users.findo.dataClasses.CartDatabase;
 import com.users.findo.dataClasses.Item;
 import com.users.findo.dataClasses.Promotion;
 import com.users.findo.dataClasses.Store;
-import com.users.findo.databaseClass.CartDb;
-import com.users.findo.databaseClass.FavDb;
 import com.users.findo.databinding.FragmentDashboardBinding;
+import com.users.findo.viewModels.CategoryViewModel;
 import com.users.findo.viewModels.PromotionViewModel;
 import com.users.findo.viewModels.StoreViewModel;
 
@@ -56,7 +51,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.concurrent.CountDownLatch;
 
 
 public class DashboardFragment extends Fragment {
@@ -68,13 +62,14 @@ public class DashboardFragment extends Fragment {
     public static String state, city;
     List<Item>featuredItems, newItems;
     public static List<Item>allItems;
+    public static List<Store>allStores;
     private Handler handler;
     FragmentDashboardBinding binding;
     public static double userLat,userLong;
     PromotionViewModel promotionViewModel;
     StoreViewModel storeViewModel;
-    FeaturedItemAdapter featuredItemAdapter;
-    allItemsRvAdapter itemListAdapter;
+    CategoryViewModel categoryViewModel;
+    CategoryAdapter categoryAdapter;
     StoreListRvAdapter storeListRvAdapter;
     private final Runnable runnable = new Runnable() {
         @Override
@@ -97,7 +92,13 @@ public class DashboardFragment extends Fragment {
         geocoder = new Geocoder(requireContext(),Locale.getDefault());
         featuredItems = new ArrayList<>();
         newItems = new ArrayList<>();
-
+        allItems = new ArrayList<>();
+        allStores = new ArrayList<>();
+        categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
+        categoryViewModel.getCategoryLiveData().observe(getViewLifecycleOwner(), categories -> {
+            categoryAdapter = new CategoryAdapter(requireContext(),categories);
+            binding.categoryRv.setAdapter(categoryAdapter);
+        });
         promotionViewModel = new ViewModelProvider(this).get(PromotionViewModel.class);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
         mLocationCallback = new LocationCallback() {
@@ -147,149 +148,26 @@ public class DashboardFragment extends Fragment {
         storeViewModel.getLiveStoreData().observe(getViewLifecycleOwner(), stores -> {
             binding.shimmerFrag.stopShimmer();
             binding.shimmerFrag.setVisibility(View.GONE);
-            //get All Items of above items
-            storeViewModel.getLiveStoreItemsData().observe(getViewLifecycleOwner(), items -> {
-                this.allItems = items;
-                getFeaturedItem(items);
-                featuredItemAdapter = new FeaturedItemAdapter(requireContext(), featuredItems, new FeaturedItemAdapter.FeaturedItemListener() {
-                    @Override
-                    public void FavItemOnClick(FeaturedItemAdapter.MyViewHolder v, int position) {
-
-                        FavDb favDb = new FavDb(requireContext());
-                        if(favDb.itemExist(featuredItems.get(position).getItemId())){
-                            //item is already in fav list -> remove it
-                            favDb.deleteItem(featuredItems.get(position).getItemId());
-                            v.favImage.setImageResource(R.drawable.ic_white_heart);
-                            //notify data set changed
-                        }else{
-                            //add into favDb
-                            favDb.insertOneItem(newItems.get(position));
-                            v.favImage.setVisibility(View.GONE);
-                            v.heart.setAnimation(R.raw.heart);
-                            v.heart.setScaleX(1.45f);
-                            v.heart.setScaleY(1.45f);
-                            v.heart.setSpeed(2.5f);
-                            v.heart.playAnimation();
-                        }
-                    }
-
-                    @Override
-                    public void AddToCartItemOnClick(FeaturedItemAdapter.MyViewHolder v, int position) {
-
-                        CartDb cartDb = new CartDb(requireContext());
-                        cartDb.insertOneItem(featuredItems.get(position));
-                        v.sparkle.setAnimation(R.raw.sparkle);
-                        v.sparkle.setScaleX(3f);
-                        v.sparkle.setScaleY(3f);
-                        v.sparkle.playAnimation();
-                        v.addToCart.setVisibility(View.GONE);
-                        v.removeFromCart.setVisibility(View.VISIBLE);
-                    }
-
-                    @Override
-                    public void RemoveFromCartItemOnClick(FeaturedItemAdapter.MyViewHolder v, int position) {
-
-                        CartDb cartDb = new CartDb(requireContext());
-                        cartDb.deleteItem(featuredItems.get(position).getItemId());
-                        v.addToCart.setVisibility(View.VISIBLE);
-                        v.removeFromCart.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void ItemOnClick(FeaturedItemAdapter.MyViewHolder v, int position) {
-
-                        Intent intent = new Intent(getActivity(), ItemsDetails.class);
-                        intent.putExtra("item",featuredItems.get(position));
-                        startActivity(intent);
-                    }
-                });
-                itemListAdapter = new allItemsRvAdapter(requireContext(), newItems, new allItemsRvAdapter.AllItemListener() {
-                    @Override
-                    public void FavItemOnClick(allItemsRvAdapter.MyViewHolder1 v, int position) {
-                        FavDb favDb = new FavDb(requireContext());
-                        if(favDb.itemExist(newItems.get(position).getItemId())){
-                            //item is already in fav list -> remove it
-                            favDb.deleteItem(newItems.get(position).getItemId());
-                            v.favImage.setImageResource(R.drawable.ic_white_heart);
-                            //notify data set changed
-                        }else{
-                            //add into favDb
-                            favDb.insertOneItem(newItems.get(position));
-                            v.favImage.setVisibility(View.GONE);
-                            v.heart.setAnimation(R.raw.heart);
-                            v.heart.setScaleX(1.45f);
-                            v.heart.setScaleY(1.45f);
-                            v.heart.setSpeed(2.5f);
-                            v.heart.playAnimation();
-                        }
-                    }
-
-                    @Override
-                    public void AddToCartItemOnClick(allItemsRvAdapter.MyViewHolder1 v, int position) {
-                        CartDb cartDb = new CartDb(requireContext());
-                        cartDb.insertOneItem(newItems.get(position));
-                        v.sparkle.setAnimation(R.raw.sparkle);
-                        v.sparkle.setScaleX(3f);
-                        v.sparkle.setScaleY(3f);
-                        v.sparkle.playAnimation();
-                        v.addToCart.setVisibility(View.GONE);
-                        v.removeFromCart.setVisibility(View.VISIBLE);
-                    }
-
-                    @Override
-                    public void RemoveFromCartItemOnClick(allItemsRvAdapter.MyViewHolder1 v, int position) {
-                        CartDb cartDb = new CartDb(requireContext());
-                        cartDb.deleteItem(newItems.get(position).getItemId());
-                        v.addToCart.setVisibility(View.VISIBLE);
-                        v.removeFromCart.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void ItemOnClick(allItemsRvAdapter.MyViewHolder1 v, int position) {
-                        Intent intent = new Intent(getActivity(), ItemsDetails.class);
-                        intent.putExtra("item",newItems.get(position));
-                        startActivity(intent);
-                    }
-                });
-                binding.allItemsRv.setAdapter(itemListAdapter);
-                binding.featuredRv.setAdapter(featuredItemAdapter);
-            });
             binding.mainView.setVisibility(View.VISIBLE);
+            allStores = stores;
             stores.sort((store1, store2) -> Float.compare(store1.getDist(), store2.getDist()));
             List<Store> top5Stores = stores.subList(0, Math.min(stores.size(), 5));
-            storeListRvAdapter = new StoreListRvAdapter(requireContext(), top5Stores, new StoreListRvAdapter.ItemClickListener() {
-                @Override
-                public void itemOnClickListener(View v, int position) {
-                    Intent i = new Intent(requireContext(), StoreDetails.class);
-                    i.putExtra("store",top5Stores.get(position));
-                    startActivity(i);
-                }
+            storeListRvAdapter = new StoreListRvAdapter(requireContext(), top5Stores, (v, position) -> {
+                Intent i = new Intent(requireContext(), StoreDetails.class);
+                i.putExtra("store",top5Stores.get(position));
+                startActivity(i);
             });
             binding.storeRv.setAdapter(storeListRvAdapter);
         });
+        storeViewModel.getLiveStoreItemsData().observe(getViewLifecycleOwner(), items -> {
+            allItems= items;
+        });
+    }
 
-    }
-    private void getFeaturedItem(List<Item> items){
-        featuredItems.clear();
-        newItems.clear();
-        for (Item i :
-                items) {
-            if(i!=null) {
-                if (i.getItemTag().equals("Featured")) {
-                    featuredItems.add(i);
-                } else if (i.getItemTag().equals("New")) {
-                    newItems.add(i);
-                }
-            }
-        }
-    }
     private void setupSlideBar(List<Promotion> promotions) {
         List<String> imageList = new ArrayList<>();
-        Timestamp currentTimestamp = Timestamp.now(); // Get current timestamp
         for (Promotion promo : promotions) {
-            Timestamp endDate = promo.getEndDate(); // Assuming you have a method to get the end date
-
-            if (endDate != null && endDate.compareTo(currentTimestamp) > 0) {
+            if (promo.getCategory().equals("general")) {
                 imageList.add(promo.getImageUrl());
             }
         }
@@ -313,9 +191,9 @@ public class DashboardFragment extends Fragment {
                 if(position == imageList.size()-1){
                     handler.postDelayed(()->{
                         binding.imageSlider.post(() -> binding.imageSlider.setCurrentItem(0));
-                    },3000);
+                    },5000);
                 }else{
-                    handler.postDelayed(runnable, 3000);
+                    handler.postDelayed(runnable, 5000);
                 }
 
             }

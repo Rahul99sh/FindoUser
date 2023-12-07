@@ -1,51 +1,31 @@
 package com.users.findo.dataClasses;
 
 public class Category {
-    String categoryName;
-    int backColor;
-    int strokeColor;
-    int imageId;
+    String Name;
+    String link;
 
     public Category(){
 
     }
 
-    public Category(String categoryName, int imageId,int backColor,int strokeColor) {
-        this.categoryName = categoryName;
-        this.imageId = imageId;
-        this.backColor = backColor;
-        this.strokeColor = strokeColor;
+    public Category(String name, String link) {
+        Name = name;
+        this.link = link;
     }
 
-    public int getBackColor() {
-        return backColor;
+    public String getName() {
+        return Name;
     }
 
-    public int getStrokeColor() {
-        return strokeColor;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public void setStrokeColor(int strokeColor) {
-        this.strokeColor = strokeColor;
+    public String getLink() {
+        return link;
     }
 
-    public void setBackColor(int backColor) {
-        this.backColor = backColor;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public int getImageId() {
-        return imageId;
-    }
-
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setLink(String link) {
+        this.link = link;
     }
 }

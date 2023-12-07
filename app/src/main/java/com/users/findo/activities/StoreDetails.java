@@ -2,14 +2,17 @@ package com.users.findo.activities;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.users.findo.R;
 import com.users.findo.adapters.ItemListAdapter;
 import com.users.findo.dataClasses.CartDatabase;
@@ -17,6 +20,7 @@ import com.users.findo.dataClasses.Item;
 import com.users.findo.dataClasses.Store;
 import com.users.findo.databaseClass.CartDb;
 import com.users.findo.databaseClass.FavDb;
+import com.users.findo.databinding.ActivityStoreDetailsBinding;
 import com.users.findo.repos.StoreByIdRepo;
 import com.users.findo.viewModels.StoreByIdViewModel;
 import com.users.findo.viewModels.StoreByIdViewModelFactory;
@@ -30,11 +34,12 @@ public class StoreDetails extends AppCompatActivity{
 
     TextView storename;
     StoreByIdViewModel storeByIdViewModel;
+    ActivityStoreDetailsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_details);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_store_details);
         storename = findViewById(R.id.storeName);
         RecyclerView recyclerView = findViewById(R.id.itemsRV);
         Store store = Objects.requireNonNull(getIntent().getParcelableExtra("store"));
@@ -43,7 +48,7 @@ public class StoreDetails extends AppCompatActivity{
 
         storeByIdViewModel.getLiveStoreItemsData().observe(this, currItem -> {
             storename.setText(store.getStoreName());
-
+            Glide.with(this).load(store.getStoreUrl()).into(binding.shopimg);
             ItemListAdapter adapter = new ItemListAdapter(this, currItem, new ItemListAdapter.ItemClickListener() {
                 @Override
                 public void FavItemOnClick(ItemListAdapter.MyViewHolder v, int position) {
@@ -94,15 +99,17 @@ public class StoreDetails extends AppCompatActivity{
                     startActivity(intent);
                 }
             });
-
-
             adapter.notifyDataSetChanged();
             recyclerView.setAdapter(adapter);
         });
-
-
-
-
+        binding.loc.setOnClickListener(v -> {
+            String uri = "google.navigation:q=" + store.getStoreLat() + "," + store.getStoreLong();
+            // Create an intent to open the Google Maps app with the URI
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            intent.setPackage("com.google.android.apps.maps"); // Specify package to ensure Maps app is launched
+            // Start the intent
+            startActivity(intent);
+        });
 
     }
 

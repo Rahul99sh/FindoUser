@@ -35,6 +35,8 @@ public class CartDb extends SQLiteOpenHelper {
     private static final String ITEM_Rating = "itemRating";
     private static final String ITEM_CLICK = "itemClick";
     private static final String ITEM_ADD = "itemADD";
+    private static final String ITEM_AR = "itemAr";
+    private static final String ITEM_AR_LINK = "itemArLink";
 
     public SQLiteDatabase getDatabase() {
         return getWritableDatabase();
@@ -60,6 +62,8 @@ public class CartDb extends SQLiteOpenHelper {
                 ITEM_PRICE + " TEXT, " +
                 ITEM_DESC + " TEXT, " +  // Add the missing column here
                 ITEM_Rating + " TEXT, " +
+                ITEM_AR + " TEXT, " +
+                ITEM_AR_LINK + " TEXT, " +
                 ITEM_CLICK + " TEXT, " +
                 ITEM_ADD + " TEXT)");
     }
@@ -89,6 +93,8 @@ public class CartDb extends SQLiteOpenHelper {
         values.put(ITEM_Rating, cart.getItemRating());
         values.put(ITEM_CLICK, cart.getClicks());
         values.put(ITEM_ADD, cart.getAddedToCart());
+        values.put(ITEM_AR, cart.isArEnabled());
+        values.put(ITEM_AR_LINK, cart.getArModelLink());
         db.insert(TABLE_NAME, null, values);
         db.close();
     }
@@ -120,7 +126,10 @@ public class CartDb extends SQLiteOpenHelper {
                 String item_add = cursor.getString(cursor.getColumnIndex(ITEM_ADD));
                 String item_click = cursor.getString(cursor.getColumnIndex(ITEM_CLICK));
                 String item_rating = cursor.getString(cursor.getColumnIndex(ITEM_Rating));
-                data.add(new Item( item_image, Double.parseDouble(store_lat), Double.parseDouble(store_long) ,store_image,store_name, item_name, "", item_price, item_id,item_category,store_id,item_tag,Double.parseDouble(item_rating),Integer.parseInt(item_click), Integer.parseInt(item_add)));
+                String item_ar = cursor.getString(cursor.getColumnIndex(ITEM_AR));
+                String item_ar_link = cursor.getString(cursor.getColumnIndex(ITEM_AR_LINK));
+                data.add(new Item( item_image, Double.parseDouble(store_lat), Double.parseDouble(store_long) ,store_image,store_name, item_name, "", item_price, item_id,
+                        item_category,store_id,item_tag,Double.parseDouble(item_rating),Integer.parseInt(item_click), Integer.parseInt(item_add), Boolean.parseBoolean(item_ar), item_ar_link));
             } while (cursor.moveToNext());
         }
         cursor.close();

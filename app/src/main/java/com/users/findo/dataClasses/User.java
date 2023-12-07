@@ -7,6 +7,7 @@ public class User {
     String name,email,image, referralCode;
     List<String> cart;
 
+    public User(){}
     public User(String name, String email, String image, String referalCode, List<String> cart) {
         this.name = name;
         this.email = email;

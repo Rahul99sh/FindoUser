@@ -30,6 +30,13 @@ public class FavDb extends SQLiteOpenHelper {
     private static final String ITEM_TAG = "itemTag";
 
     private static final String ITEM_PRICE = "itemPrice";
+
+    private static final String ITEM_DESC = "itemDesc";
+    private static final String ITEM_Rating = "itemRating";
+    private static final String ITEM_CLICK = "itemClick";
+    private static final String ITEM_ADD = "itemADD";
+    private static final String ITEM_AR = "itemAr";
+    private static final String ITEM_AR_LINK = "itemArLink";
     public SQLiteDatabase getDatabase() {
         return getWritableDatabase();
     }
@@ -39,8 +46,24 @@ public class FavDb extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" +   STORE_ID + " TEXT, " + STORE_NAME + " TEXT, " +  STORE_IMAGE + " TEXT, " +   STORE_LAT + " TEXT, " +   STORE_LONG + " TEXT, " +   ITEM_ID + " TEXT PRIMARY KEY, " +   ITEM_IMAGE + " TEXT, " + ITEM_NAME + " TEXT," + ITEM_CATEGORY + " TEXT,"  + ITEM_TAG+ " TEXT, "  + ITEM_PRICE+ " TEXT)");
-    }
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" +
+                STORE_ID + " TEXT, " +
+                STORE_NAME + " TEXT, " +
+                STORE_IMAGE + " TEXT, " +
+                STORE_LAT + " TEXT, " +
+                STORE_LONG + " TEXT, " +
+                ITEM_ID + " TEXT PRIMARY KEY, " +
+                ITEM_IMAGE + " TEXT, " +
+                ITEM_NAME + " TEXT, " +
+                ITEM_CATEGORY + " TEXT, " +
+                ITEM_TAG + " TEXT, " +
+                ITEM_PRICE + " TEXT, " +
+                ITEM_DESC + " TEXT, " +  // Add the missing column here
+                ITEM_Rating + " TEXT, " +
+                ITEM_AR + " TEXT, " +
+                ITEM_AR_LINK + " TEXT, " +
+                ITEM_CLICK + " TEXT, " +
+                ITEM_ADD + " TEXT)");    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -83,6 +106,12 @@ public class FavDb extends SQLiteOpenHelper {
         values.put(ITEM_CATEGORY, cart.getCategory());
         values.put(ITEM_TAG, cart.getItemTag());
         values.put(ITEM_PRICE, cart.getPrice());
+        values.put(ITEM_DESC, cart.getItemDescription());
+        values.put(ITEM_Rating, cart.getItemRating());
+        values.put(ITEM_CLICK, cart.getClicks());
+        values.put(ITEM_ADD, cart.getAddedToCart());
+        values.put(ITEM_AR, cart.isArEnabled());
+        values.put(ITEM_AR_LINK, cart.getArModelLink());
         db.insert(TABLE_NAME, null, values);
         db.close();
     }
@@ -94,8 +123,8 @@ public class FavDb extends SQLiteOpenHelper {
         return isEmpty;
     }
 
-    public ArrayList<CartDatabase> getData() {
-        ArrayList<CartDatabase> data = new ArrayList<>();
+    public ArrayList<Item> getData() {
+        ArrayList<Item> data = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (cursor.moveToFirst()) {
@@ -112,7 +141,13 @@ public class FavDb extends SQLiteOpenHelper {
                 String item_category = cursor.getString(cursor.getColumnIndex(ITEM_CATEGORY));
                 String item_tag = cursor.getString(cursor.getColumnIndex(ITEM_TAG));
                 String item_price = cursor.getString(cursor.getColumnIndex(ITEM_PRICE));
-                data.add(new CartDatabase(store_id, item_id, item_name ,store_name, store_image, item_image, Double.parseDouble(store_lat), Double.parseDouble(store_long),item_category,item_tag,item_price));
+                String item_add = cursor.getString(cursor.getColumnIndex(ITEM_ADD));
+                String item_click = cursor.getString(cursor.getColumnIndex(ITEM_CLICK));
+                String item_rating = cursor.getString(cursor.getColumnIndex(ITEM_Rating));
+                String item_ar = cursor.getString(cursor.getColumnIndex(ITEM_AR));
+                String item_ar_link = cursor.getString(cursor.getColumnIndex(ITEM_AR_LINK));
+                data.add(new Item( item_image, Double.parseDouble(store_lat), Double.parseDouble(store_long) ,store_image,store_name, item_name, "", item_price, item_id,
+                        item_category,store_id,item_tag,Double.parseDouble(item_rating),Integer.parseInt(item_click), Integer.parseInt(item_add), Boolean.parseBoolean(item_ar), item_ar_link));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -120,10 +155,10 @@ public class FavDb extends SQLiteOpenHelper {
         return data;
     }
 
-    public boolean updateData(CartDatabase cart) {
+    public boolean updateData(Item cart) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(STORE_ID, cart.getStoreId());
+        values.put(STORE_ID, cart.getStoreID());
         values.put(STORE_NAME, cart.getStoreName());
         values.put(STORE_IMAGE, cart.getStoreUrl());
         values.put(STORE_LAT, cart.getStoreLat());
@@ -131,7 +166,7 @@ public class FavDb extends SQLiteOpenHelper {
         values.put(ITEM_ID, cart.getItemId());
         values.put(ITEM_IMAGE, cart.getItemUrl());
         values.put(ITEM_NAME, cart.getItemName());
-        values.put(ITEM_CATEGORY, cart.getItemCategory());
+        values.put(ITEM_CATEGORY, cart.getCategory());
         values.put(ITEM_TAG, cart.getItemTag());
         values.put(ITEM_PRICE, cart.getPrice());
 

@@ -15,13 +15,15 @@ public class Item implements Parcelable {
     private String ItemName, ItemDescription, price, ItemId, Category, storeID, ItemTag;
     private double ItemRating;
     private int clicks, addedToCart;
+    private boolean arEnabled;
+    private String arModelLink;
 
     public Item() {
     }
 
     public Item(String itemUrl, Double storeLat, Double storeLong, String storeUrl, String storeName, String itemName, String itemDescription,
                 String price, String itemId,
-                String category, String storeID, String itemTag, double itemRating, int clicks, int addedToCart) {
+                String category, String storeID, String itemTag, double itemRating, int clicks, int addedToCart, boolean areEnabled, String arModelLink) {
         ItemUrl = itemUrl;
         StoreLat = storeLat;
         StoreLong = storeLong;
@@ -37,6 +39,8 @@ public class Item implements Parcelable {
         ItemRating = itemRating;
         this.clicks = clicks;
         this.addedToCart = addedToCart;
+        this.arEnabled = areEnabled;
+        this.arModelLink = arModelLink;
     }
 
     protected Item(Parcel in) {
@@ -55,6 +59,8 @@ public class Item implements Parcelable {
         clicks = in.readInt();
         addedToCart = in.readInt();
         storeID = in.readString();
+        arEnabled = in.readByte() != 0;
+        arModelLink = in.readString();
     }
 
     @Override
@@ -74,11 +80,29 @@ public class Item implements Parcelable {
         dest.writeInt(clicks);
         dest.writeInt(addedToCart);
         dest.writeString(storeID);
+        dest.writeByte((byte) (arEnabled ? 1 : 0));
+        dest.writeString(arModelLink);
     }
 
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    public boolean isArEnabled() {
+        return arEnabled;
+    }
+
+    public void setArEnabled(boolean arEnabled) {
+        this.arEnabled = arEnabled;
+    }
+
+    public String getArModelLink() {
+        return arModelLink;
+    }
+
+    public void setArModelLink(String arModelLink) {
+        this.arModelLink = arModelLink;
     }
 
     public static final Creator<Item> CREATOR = new Creator<Item>() {

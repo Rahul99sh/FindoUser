@@ -68,7 +68,7 @@ public class StoreRepo {
                 }
                 if (value != null) {
                     Store s = value.toObject(Store.class);
-                    if (s != null) {
+                    if (s != null && s.isVerified()) {
                         Location storeLoc = new Location("");
                         storeLoc.setLatitude(s.getStoreLat());
                         storeLoc.setLongitude(s.getStoreLong());
@@ -91,7 +91,6 @@ public class StoreRepo {
     private void getStoreItems(String storeId, Store s) {
         db.collection("Store").document(storeId).collection("Items").addSnapshotListener((value, error) -> {
             if (error != null) {
-                // Handle error
                 return;
             }
             if (value != null) {
@@ -110,10 +109,11 @@ public class StoreRepo {
                 }
                 allItems.addAll(itemList);
                 count1++;
-                if(count1 == allStoresId.size()){
+//                if(count1 == allStoresId.size()){
                     storeItemsMutableLiveData.postValue(allItems);
-                }
+//                }
             }
+
         });
     }
 

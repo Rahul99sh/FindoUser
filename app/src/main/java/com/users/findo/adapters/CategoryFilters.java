@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -42,7 +43,7 @@ public class CategoryFilters extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         //inserting data
         MyViewHolder viewHolder = (MyViewHolder) holder;
-        viewHolder.categoryName.setText(categoryArrayList.get(position).getCategoryName());
+        viewHolder.categoryName.setText(categoryArrayList.get(position).getName());
 //        viewHolder.back.setBackgroundColor(categoryArrayList.get(position).getBackColor());
 //        viewHolder.back.setStrokeColor(categoryArrayList.get(position).getStrokeColor());
 
@@ -51,7 +52,7 @@ public class CategoryFilters extends RecyclerView.Adapter<RecyclerView.ViewHolde
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .error(R.drawable.ic_happy);
-        Glide.with(viewHolder.categoryImage.getContext()).load(categoryArrayList.get(position).getImageId()).apply(options).into(viewHolder.categoryImage);
+        Glide.with(viewHolder.categoryImage.getContext()).load(categoryArrayList.get(position).getLink()).apply(options).into(viewHolder.categoryImage);
     }
 
     @Override
@@ -63,7 +64,7 @@ public class CategoryFilters extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         ImageView categoryImage;
         TextView categoryName;
-        MaterialCardView back;
+        CardView back;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 

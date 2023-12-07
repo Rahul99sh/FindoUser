@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.AllStores">
+    tools:context=".activities.AllStores">
 
     <LinearLayout
         android:id="@+id/AllStores_NavBar"
