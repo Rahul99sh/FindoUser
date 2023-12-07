@@ -53,11 +53,10 @@ public class AllStores extends AppCompatActivity {
                 }
                 adapter = new StoreListRvAdapter(this, filteredSores, (v, position) -> {
                     Intent i = new Intent(AllStores.this, StoreDetails.class);
-                    i.putExtra("store",stores.get(position));
+                    i.putExtra("store",filteredSores.get(position));
                     startActivity(i);
                 });
             }
-
             recyclerView.setAdapter(adapter);
         });
 

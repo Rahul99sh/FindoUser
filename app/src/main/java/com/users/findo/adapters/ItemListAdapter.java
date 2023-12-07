@@ -52,23 +52,12 @@ public class ItemListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         MyViewHolder myViewHolder = (MyViewHolder) holder;
         myViewHolder.ItemName.setText(itemList.get(holder.getAdapterPosition()).getItemName());
+        myViewHolder.desc.setText(itemList.get(holder.getAdapterPosition()).getItemDescription());
         myViewHolder.price.setText(itemList.get(holder.getAdapterPosition()).getPrice() + " Rs");
 
-        // Get a reference to the system vibrator service
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
-        // Define the duration for which to vibrate the phone (in milliseconds)
         int duration = 100;
-
-//            if (itemList.get(position).getItemTag().equals("")) {
-//                myViewHolder.tagText.setVisibility(View.INVISIBLE);}
-//            } else if (itemList.get(position).getItemTag().equals("New")) {
-//                myViewHolder.tagText.setText("New");
-//            } else {
-//                myViewHolder.tagText.setText("Featured");
-//                myViewHolder.tagText.setBackgroundColor(context.getColor(R.color.featured));
-//                myViewHolder.tagText.setTextColor(context.getColor(R.color.white));
-//            }
 
         CartDb cartDb = new CartDb(context);
         if (cartDb.itemExist(itemList.get(holder.getAdapterPosition()).getItemId())) {
@@ -119,7 +108,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView ItemName;
         ImageView ImageUrl;
         public TextView addToCart;
-        public TextView removeFromCart;
+        public TextView removeFromCart,desc;
         public  LottieAnimationView heart  ;
         public  LottieAnimationView sparkle  ;
         private TextView tagText, price;
@@ -135,7 +124,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             favImage = itemView.findViewById(R.id.fav_img);
             heart = itemView.findViewById(R.id.favLottie);
             sparkle = itemView.findViewById(R.id.sparkleLottie);
-//            tagText = itemView.findViewById(R.id.tagText);
+            desc = itemView.findViewById(R.id.item_short_desc);
             price = itemView.findViewById(R.id.item_price);
         }
     }

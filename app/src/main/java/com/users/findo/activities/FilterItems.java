@@ -22,6 +22,8 @@ import com.users.findo.dataClasses.Category;
 import com.users.findo.dataClasses.Item;
 import com.users.findo.databaseClass.CartDb;
 import com.users.findo.databaseClass.SearchHistoryDb;
+import com.users.findo.viewModels.CategoryViewModel;
+import com.users.findo.viewModels.GroceryCategoryViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,8 @@ public class FilterItems extends AppCompatActivity {
     RelativeLayout searchHistoryLay;
     ArrayList<Item> filteredItemList = new ArrayList<>();
     ArrayList<Item> filteredItemList1 = new ArrayList<>();
-
+    CategoryViewModel categoryViewModel;
+    GroceryCategoryViewModel groceryCategoryViewModel;
     ArrayList<Category> categories = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {

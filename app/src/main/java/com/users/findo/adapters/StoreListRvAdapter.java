@@ -2,6 +2,7 @@ package com.users.findo.adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.users.findo.activities.AllStores;
+import com.users.findo.activities.StoreDetails;
 import com.users.findo.dataClasses.Store;
 import com.users.findo.R;
 
@@ -66,12 +69,11 @@ public class StoreListRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         Glide.with(viewHolder.storeImage.getContext()).load(mStoreList.get(position).getStoreUrl()).apply(options).into(viewHolder.storeImage);
 
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                itemClickListener.itemOnClickListener(v, holder.getAdapterPosition());
-
-            }
+        viewHolder.itemView.setOnClickListener(v -> {
+//                itemClickListener.itemOnClickListener(v, holder.getAdapterPosition());
+            Intent i = new Intent(context, StoreDetails.class);
+            i.putExtra("store",mStoreList.get(position));
+            context.startActivity(i);
         });
 
     }

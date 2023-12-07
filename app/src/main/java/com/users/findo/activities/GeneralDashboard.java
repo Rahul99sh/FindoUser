@@ -55,7 +55,7 @@ public class GeneralDashboard extends AppCompatActivity {
                 }
                 adapter = new StoreListRvAdapter(this, filteredSores, (v, position) -> {
                     Intent i = new Intent(this, StoreDetails.class);
-                    i.putExtra("store",stores.get(position));
+                    i.putExtra("store",filteredSores.get(position));
                     startActivity(i);
                 });
             }

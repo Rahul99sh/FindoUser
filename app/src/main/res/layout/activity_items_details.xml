@@ -40,6 +40,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/virtual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cornerRadius="4dp"
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                app:icon="@drawable/ic_twotone_photo_camera_24"
+                android:text="@string/try_at_your_home"
+                android:textColor="@color/black"
+                app:iconTint="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:layout_gravity="center"
+                />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

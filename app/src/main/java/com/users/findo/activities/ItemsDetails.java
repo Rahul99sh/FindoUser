@@ -2,6 +2,8 @@ package com.users.findo.activities;
 
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -20,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.users.findo.R;
@@ -48,7 +51,7 @@ public class ItemsDetails extends AppCompatActivity {
         setContentView(R.layout.activity_items_details);
         item = getIntent().getParcelableExtra("item");
         rootRef = FirebaseFirestore.getInstance();
-
+        MaterialButton vr = findViewById(R.id.virtual);
         itemNameTextView = findViewById(R.id.itemNameTxt);
         addToCart = findViewById(R.id.addToCartF);
         remove = findViewById(R.id.removeFromCartF);
@@ -61,6 +64,25 @@ public class ItemsDetails extends AppCompatActivity {
         constraintLayout = findViewById(R.id.ItemDisc);
         desc = findViewById(R.id.itemDesc);
         itemStore = findViewById(R.id.itemStore);
+
+        if(item.isArEnabled()){
+            vr.setVisibility(View.VISIBLE);
+        }else{
+            vr.setVisibility(View.GONE);
+        }
+
+        vr.setOnClickListener(v -> {
+            Intent sceneViewerIntent = new Intent(Intent.ACTION_VIEW);
+            Uri.Builder intentUri = Uri.parse("https://arvr.google.com/scene-viewer/1.0").buildUpon();
+            intentUri.appendQueryParameter("file", item.getArModelLink())
+                    .appendQueryParameter("mode", "ar_only")
+                    .appendQueryParameter("resizable", "false")
+                    .appendQueryParameter("title", item.getItemName() + " - ₹" + item.getPrice());
+            sceneViewerIntent.setData(intentUri.build());
+            sceneViewerIntent.setPackage("com.google.ar.core");
+            startActivity(sceneViewerIntent);
+
+        });
 
         if(new CartDb(ItemsDetails.this).itemExist(item.getItemId())){
             addToCart.setVisibility(View.GONE);
