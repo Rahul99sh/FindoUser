@@ -7,11 +7,6 @@
         android:title="@string/home"
         app:cnb_iconColor="@color/red_inactive"/>
     <item
-        android:id="@+id/activity"
-        android:icon="@drawable/baseline_dashboard_24"
-        android:title="@string/category"
-        app:cnb_iconColor="@color/blue_inactive"/>
-    <item
         android:id="@+id/favorites"
         android:icon="@drawable/ic_redheart"
         android:title="@string/favorites"

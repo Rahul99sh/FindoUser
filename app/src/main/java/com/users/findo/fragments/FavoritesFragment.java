@@ -59,7 +59,6 @@ public class FavoritesFragment extends Fragment {
             startActivity(intent);
         });
 
-        favRv.setLayoutManager(new GridLayoutManager(requireContext(),2));
 
         ItemListAdapter adapter = new ItemListAdapter(requireContext(), favList, new ItemListAdapter.ItemClickListener() {
             @Override
@@ -83,13 +82,11 @@ public class FavoritesFragment extends Fragment {
             @Override
             public void AddToCartItemOnClick(ItemListAdapter.MyViewHolder v, int position) {
                 CartDb cartDb = new CartDb(requireContext());
-//                if(!cartDb.itemExist(favList.get(position).getItemId())){
-//                    cartDb.insertOneItem(new CartDatabase(favList.get(position).getStoreId(),favList.get(position).getItemId()
-//                            ,favList.get(position).getItemName(),favList.get(position).getStoreName(),favList.get(position).getStoreUrl(),favList.get(position).getItemUrl()
-//                            ,favList.get(position).getStoreLat(),favList.get(position).getStoreLong(), favList.get(position).getItemCategory(), favList.get(position).getItemTag(), favList.get(position).getPrice()));
-//                    v.addToCart.setVisibility(View.GONE);
-//                    v.removeFromCart.setVisibility(View.VISIBLE);
-//                }
+                if(!cartDb.itemExist(favList.get(position).getItemId())){
+                    cartDb.insertOneItem(favList.get(position));
+                    v.addToCart.setVisibility(View.GONE);
+                    v.removeFromCart.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override

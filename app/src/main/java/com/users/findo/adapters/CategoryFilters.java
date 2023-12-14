@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,19 +16,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.card.MaterialCardView;
-import com.users.findo.dataClasses.Category;
 import com.users.findo.R;
+import com.users.findo.dataClasses.Category;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryFilters extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final ArrayList<Category> categoryArrayList;
+    private final List<Category> categoryArrayList;
+    public interface itemClick{
+        public void onItemClick(View v,int pos,int selpos);
+    }
+    Category sele = null;
+    int selpos = -1;
+    itemClick itemClick;
     Context context;
-    public CategoryFilters( Context context ,ArrayList<Category> categoryArrayList){
+    public CategoryFilters( Context context ,List<Category> categoryArrayList, itemClick itemClick){
         this.context=context;
         this.categoryArrayList = categoryArrayList;
+        this.itemClick = itemClick;
     }
 
     @NonNull
@@ -44,8 +51,22 @@ public class CategoryFilters extends RecyclerView.Adapter<RecyclerView.ViewHolde
         //inserting data
         MyViewHolder viewHolder = (MyViewHolder) holder;
         viewHolder.categoryName.setText(categoryArrayList.get(position).getName());
-//        viewHolder.back.setBackgroundColor(categoryArrayList.get(position).getBackColor());
-//        viewHolder.back.setStrokeColor(categoryArrayList.get(position).getStrokeColor());
+        viewHolder.itemView.setOnClickListener(v -> {
+            itemClick.onItemClick(viewHolder.backg,position,selpos);
+            if (selpos == -1) {
+                selpos = position;
+                sele = categoryArrayList.get(position);
+            } else {
+                if (selpos != position) {
+                    // When a different item is clicked
+                    selpos = position;
+                    sele = categoryArrayList.get(position);
+                } else {
+                    selpos = -1; // Reset selection
+                    sele = null; // Reset selection data if needed
+                }
+            }
+        });
 
         setAnimation(holder.itemView,position);
 
@@ -65,11 +86,13 @@ public class CategoryFilters extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ImageView categoryImage;
         TextView categoryName;
         CardView back;
+        LinearLayout backg;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             categoryImage = itemView.findViewById(R.id.categoryImage);
             categoryName = itemView.findViewById(R.id.categoryName);
+            backg = itemView.findViewById(R.id.back);
             back = itemView.findViewById(R.id.backCardCategory);
         }
     }

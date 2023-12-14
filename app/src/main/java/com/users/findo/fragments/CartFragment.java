@@ -54,8 +54,6 @@ public class CartFragment extends Fragment {
 
         CartDb cartDb = new CartDb(requireContext());
         cartLists = cartDb.getData();
-
-        Toast.makeText(requireContext(), String.valueOf(cartLists.size()), Toast.LENGTH_SHORT).show();
         CartListAdapter adapter = new CartListAdapter(requireContext(),cartLists, position -> {
             cartDb.deleteItem(cartLists.get(position).getItemId());
             cartLists.remove(position);

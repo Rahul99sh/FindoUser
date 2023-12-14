@@ -60,14 +60,11 @@ public class CartListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         Glide.with(viewHolder.cartListImage.getContext()).load(cartArrayList.get(holder.getAdapterPosition()).getItemUrl()).apply(options).into(viewHolder.cartListImage);
 
-        viewHolder.cartListDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        viewHolder.cartListDelete.setOnClickListener(v -> {
 
-                removeItemClicked.removeItem(holder.getAdapterPosition());
-                notifyDataSetChanged();
+            removeItemClicked.removeItem(holder.getAdapterPosition());
+            notifyDataSetChanged();
 
-            }
         });
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

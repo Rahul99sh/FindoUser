@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Findo"
         tools:targetApi="31">
         <activity
+            android:name=".activities.Maintainance"
+            android:exported="false" />
+        <activity
             android:name=".activities.GeneralDashboard"
             android:exported="false" />
         <activity

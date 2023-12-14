@@ -73,7 +73,7 @@ public class FilterItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         viewHolder.itemName.setText(filteredItemList.get(holder.getAdapterPosition()).getItemName());
         viewHolder.price.setText(filteredItemList.get(holder.getAdapterPosition()).getPrice());
         viewHolder.storeName.setText( filteredItemList.get(holder.getAdapterPosition()).getStoreName());
-        if(filteredItemList.get(holder.getAdapterPosition()).getItemTag().equals("")){
+        if(filteredItemList.get(holder.getAdapterPosition()).getItemTag() == null || filteredItemList.get(holder.getAdapterPosition()).getItemTag().equals("")){
             viewHolder.tag.setVisibility(View.INVISIBLE);
         } else if (filteredItemList.get(holder.getAdapterPosition()).getItemTag().equals("New")) {
             viewHolder.tagText.setText("New");

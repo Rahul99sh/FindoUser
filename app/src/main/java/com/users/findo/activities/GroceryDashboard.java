@@ -33,7 +33,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 import com.google.firebase.Timestamp;
 import com.users.findo.R;
-import com.users.findo.adapters.CategoryAdapter;
 import com.users.findo.adapters.FeaturedItemAdapter;
 import com.users.findo.adapters.GcategoryAdapter;
 import com.users.findo.adapters.SliderAdapter;
@@ -47,7 +46,6 @@ import com.users.findo.databaseClass.FavDb;
 import com.users.findo.databinding.ActivityGroceryDashboardBinding;
 import com.users.findo.viewModels.GroceryCategoryViewModel;
 import com.users.findo.viewModels.PromotionViewModel;
-import com.users.findo.viewModels.StoreViewModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,7 +66,6 @@ public class GroceryDashboard extends AppCompatActivity {
     ActivityGroceryDashboardBinding binding;
     public static double userLat,userLong;
     PromotionViewModel promotionViewModel;
-    StoreViewModel storeViewModel;
     GroceryCategoryViewModel groceryCategoryViewModel;
     FeaturedItemAdapter featuredItemAdapter;
     allItemsRvAdapter itemListAdapter;
@@ -278,9 +275,9 @@ public class GroceryDashboard extends AppCompatActivity {
         for (Item i :
                 items) {
             if(i!=null) {
-                if (i.getItemTag().equals("Featured")) {
+                if (i.getItemTag()!=null && i.getItemTag().equals("Featured")) {
                     featuredItems.add(i);
-                } else if (i.getItemTag().equals("New")) {
+                } else if (i.getItemTag()!=null&&i.getItemTag().equals("New")) {
                     newItems.add(i);
                 }
             }

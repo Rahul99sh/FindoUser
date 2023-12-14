@@ -6,15 +6,16 @@
     android:id="@+id/backCardCategory"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/_4sdp"
-    app:cardBackgroundColor="@color/greyBackground"
     app:cardElevation="0dp"
     android:layout_marginStart="@dimen/_5sdp"
     android:layout_marginTop="@dimen/_6sdp"
     >
     <LinearLayout
+        android:id="@+id/back"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@drawable/nav_grad_f"
         android:padding="@dimen/_5sdp"
         >
         <de.hdodenhof.circleimageview.CircleImageView
@@ -29,7 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:fontFamily="@font/poppins_light"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/text_primary"
             android:textSize="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_1sdp"
             android:text="@string/categories"

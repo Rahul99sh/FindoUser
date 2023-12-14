@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -34,51 +35,25 @@ public class FilterItems extends AppCompatActivity {
     ArrayList<String> searchHistory = new ArrayList<>();
     SearchView searchView;
     RelativeLayout searchHistoryLay;
+    public RecyclerView categoryFilter;
     ArrayList<Item> filteredItemList = new ArrayList<>();
     ArrayList<Item> filteredItemList1 = new ArrayList<>();
     CategoryViewModel categoryViewModel;
     GroceryCategoryViewModel groceryCategoryViewModel;
-    ArrayList<Category> categories = new ArrayList<>();
+    List<Category> categories2 = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_items);
-
-        SearchHistoryDb searchHistoryDb = new SearchHistoryDb(this);
-        searchHistory = searchHistoryDb.getData();
-
-        searchView = findViewById(R.id.Filter_searchView);
-        searchHistoryLay = findViewById(R.id.searchHistoryLay);
-
         RecyclerView searchRv = findViewById(R.id.searchHistoryRv);
         RecyclerView filterItems = findViewById(R.id.filter_item_rv);
-        RecyclerView categoryFilter = findViewById(R.id.categoryViseFilter);
+        categoryFilter = findViewById(R.id.categoryViseFilter);
         LinearLayout category = findViewById(R.id.category);
-
-//        categories.add(new Category("Fruits & vegetables",R.drawable.category_fruit,R.color.transparent_green,R.color.featured));
-//        categories.add(new Category("Diary, Bread &\n Eggs",R.drawable.category_eggs_bread,R.color.transparent_yellow,R.color.yellow));
-//        categories.add(new Category("Beverages",R.drawable.category_beverage,R.color.DarkYellow,R.color.SecondYellow));
-//        categories.add(new Category("Instant Food",R.drawable.category_instant_food,R.color.transparent_Purple,R.color.purple));
-//        categories.add(new Category("Cleaning &\n Household",R.drawable.category_household,R.color.transparent_red,R.color.red));
-//        categories.add(new Category("Personal Care",R.drawable.category_personal_care,R.color.transparent_flamingo,R.color.flamingo));
-//        categories.add(new Category("Baby Care",R.drawable.category_baby_care,R.color.transparent_cream,R.color.cream));
-//        categories.add(new Category("Pet Care",R.drawable.category_pet_care,R.color.transparent_magenta,R.color.magenta));
-//        categories.add(new Category("Party Essentials",R.drawable.category_party_essentials,R.color.transparent_cyan,R.color.cyan));
-//        categories.add(new Category("Desserts",R.drawable.category_desserts,R.color.transparent_mustard,R.color.mustard));
-//        categories.add(new Category("Munchies",R.drawable.category_munchies,R.color.transparent_Denim,R.color.transparent_Denim));
-//        categories.add(new Category("Stationary",R.drawable.category_stationary,R.color.transparent_cherub,R.color.transparent_cherub));
-//        categories.add(new Category("Utensils",R.drawable.category_utensils,R.color.transparent_darkBrown,R.color.darkBrown));
-
-        CategoryFilters adapter2 = new CategoryFilters(FilterItems.this,categories);
-//        GridLayoutManager layoutManager = new GridLayoutManager(FilterItems.this,2);
-//        categoryFilter.setLayoutManager(layoutManager);
-        categoryFilter.setAdapter(adapter2);
-
-        SearchHistoryAdapter adapter = new SearchHistoryAdapter(this,searchHistory);
-
-        searchRv.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
-        searchRv.setAdapter(adapter);
-
+        SearchHistoryDb searchHistoryDb = new SearchHistoryDb(this);
+        searchHistory = searchHistoryDb.getData();
+        groceryCategoryViewModel = new ViewModelProvider(this).get(GroceryCategoryViewModel.class);
+        searchView = findViewById(R.id.Filter_searchView);
+        searchHistoryLay = findViewById(R.id.searchHistoryLay);
         FilterItemAdapter adapter1 = new FilterItemAdapter(this, new ArrayList<>(), new FilterItemAdapter.ItemClickListener() {
             @Override
             public void AddToCartItemOnClick(FilterItemAdapter.MyNewViewHolder v, int position) {
@@ -103,6 +78,51 @@ public class FilterItems extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
+        categoryViewModel.getCategoryLiveData().observe(this, categories -> {
+            categories2.addAll(categories);
+            groceryCategoryViewModel.getCategoryLiveData().observe(this, categories1 -> {
+                categories2.addAll(categories1);
+                CategoryFilters adapter2 = new CategoryFilters(FilterItems.this, categories2, new CategoryFilters.itemClick() {
+                    @Override
+                    public void onItemClick(View v, int pos, int selpos) {
+                        if (selpos == -1) {
+                            v.setBackgroundResource(R.drawable.grad_nav_g);
+                            filteredItemList1 = filterItems(categories2.get(pos).getName());
+                            adapter1.setFilteredItemList(filteredItemList1);
+                        } else {
+                            if (selpos != pos) {
+                                // When a different item is clicked
+                                RecyclerView.ViewHolder prevViewHolder = categoryFilter.findViewHolderForAdapterPosition(selpos);
+                                if (prevViewHolder != null) {
+                                    prevViewHolder.itemView.findViewById(R.id.back).setBackgroundResource(R.drawable.nav_grad_f);
+                                }
+                                v.setBackgroundResource(R.drawable.grad_nav_g);
+                                filteredItemList1 = filterItems(categories2.get(pos).getName());
+                                adapter1.setFilteredItemList(filteredItemList1);
+                            } else {
+                                // When the same item is clicked again
+                                v.setBackgroundResource(R.drawable.nav_grad_f);
+                                filteredItemList1 = filterItems("");
+                                adapter1.setFilteredItemList(filteredItemList1);
+                            }
+                        }
+                    }
+                });
+                categoryFilter.setAdapter(adapter2);
+            });
+
+        });
+
+
+
+
+        SearchHistoryAdapter adapter = new SearchHistoryAdapter(this,searchHistory);
+
+        searchRv.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+        searchRv.setAdapter(adapter);
+
+
 
         filterItems.setLayoutManager(new GridLayoutManager(FilterItems.this,2));
         filterItems.setAdapter(adapter1);
@@ -158,8 +178,8 @@ public class FilterItems extends AppCompatActivity {
 
         filteredItemList.clear();
         for(Item item : items){
-            if(item.getItemName().toLowerCase(Locale.ROOT).contains(q.toLowerCase(Locale.ROOT)) || item.getCategory().toLowerCase(Locale.ROOT).contains(q.toLowerCase(Locale.ROOT))
-                    || item.getStoreName().toLowerCase(Locale.ROOT).contains(q.toLowerCase(Locale.ROOT))){
+            if(item.getItemName()!=null && item.getCategory()!=null && (item.getItemName().toLowerCase(Locale.ROOT).contains(q.toLowerCase(Locale.ROOT)) || item.getCategory().toLowerCase(Locale.ROOT).contains(q.toLowerCase(Locale.ROOT))
+                    || item.getStoreName().toLowerCase(Locale.ROOT).contains(q.toLowerCase(Locale.ROOT)))){
                 filteredItemList.add(item);
             }
         }
@@ -169,5 +189,19 @@ public class FilterItems extends AppCompatActivity {
 
     }
 
+    private ArrayList<Item> filterItemsCatrgory(String q){
+
+        List<Item> items = allItems;
+
+        filteredItemList.clear();
+        for(Item item : items){
+            if( item.getCategory().toLowerCase(Locale.ROOT).contains(q.toLowerCase(Locale.ROOT))
+                    ){
+                filteredItemList.add(item);
+            }
+        }
+        return filteredItemList;
+
+    }
 
 }
